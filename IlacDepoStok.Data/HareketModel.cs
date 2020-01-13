@@ -8,7 +8,9 @@ namespace IlacDepoStok.Data
 {
 	public class HareketModel
 	{
+
 		public int id { get; set; }
+		
 		public string yon { get; set; }
 		public int adet { get; set; }
 		public int fiyat { get; set; }

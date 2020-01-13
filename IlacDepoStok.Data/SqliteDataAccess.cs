@@ -33,5 +33,23 @@ namespace IlacDepoStok.Data
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
+
+        public static List<HareketModel> findHareketbyIlacId(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<HareketModel>("select * from hareket where ilac_id=@ilac_id order by tarih desc", new { ilac_id = id });
+                return output.ToList();
+            }
+        }
+
+        public static IlacModel findIlacbyBarkod(string barkod)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.QueryFirstOrDefault<IlacModel>("select * from ilac where barcode=@barcode", new {barcode= barkod });
+                return output;
+            }
+        }
     }
 }
