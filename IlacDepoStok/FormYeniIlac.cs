@@ -27,12 +27,36 @@ namespace IlacDepoStok
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            IlacModel ilacModel = new IlacModel();
-            ilacModel.barcode = txtBarkod.Text;
-            ilacModel.adi = txtIlacAdi.Text;
-            ilacModel.notu = txtIlacNotu.Text;
-            SqliteDataAccess.SaveIlac(ilacModel);
+            if(String.IsNullOrEmpty(lblIdsi.Text))
+            {
+                IlacModel ilacModel = new IlacModel();
+                int dusukStok = 0;
+                ilacModel.barcode = txtBarkod.Text;
+                ilacModel.adi = txtIlacAdi.Text;
+                ilacModel.notu = txtIlacNotu.Text;
+                int.TryParse(txtDusukStok.Text, out dusukStok);
+                ilacModel.dusukStok = dusukStok;
+                SqliteDataAccess.SaveIlac(ilacModel);
+            }
+            else
+            {
+                IlacModel ilac = new IlacModel();
+                int dusukStok = 0;
+                ilac.adi = txtIlacAdi.Text;
+                ilac.barcode = txtBarkod.Text;
+                int.TryParse(txtDusukStok.Text, out dusukStok);
+                ilac.dusukStok = dusukStok;
+                ilac.notu = txtIlacNotu.Text;
+                ilac.id = int.Parse(lblIdsi.Text);
+                SqliteDataAccess.updateIlac(ilac);
+            }
+            
             this.Close();
+        }
+
+        private void FormYeniIlac_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

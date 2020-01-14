@@ -6,5 +6,6 @@
         public string adi { get; set; }
         public string barcode { get; set; }
         public string notu { get; set; }
+        public int dusukStok { get; set; }
     }
 }

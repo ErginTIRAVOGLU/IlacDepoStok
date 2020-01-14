@@ -25,9 +25,9 @@ namespace IlacDepoStok
             
             loadIlacList();
         }
-        
 
-     
+        public int ilacid { get; set; }
+
         private void txtBarkod_KeyUp(object sender, KeyEventArgs e)
         {
             if(e.KeyCode==Keys.Enter)
@@ -39,6 +39,8 @@ namespace IlacDepoStok
                     {
                         txtIlacAdi.Text = ilac.adi;
                         lblIacNot.Text = ilac.notu;
+                        ilacid = ilac.id;
+                        btnIlacDuzenle.Enabled = true;
                         List<HareketModel> ilacHareket = new List<HareketModel>();
                         ilacHareket = SqliteDataAccess.findHareketbyIlacId(ilac.id);
                         dGVHareket.DataSource = ilacHareket;
@@ -47,7 +49,7 @@ namespace IlacDepoStok
                     {
                         txtIlacAdi.Text = "";
                         lblIacNot.Text = "İlaç Kaydı Bulunamadı.";
-
+                        btnIlacDuzenle.Enabled = false;
                         List<HareketModel> ilacHareket = new List<HareketModel>();
                         dGVHareket.DataSource = ilacHareket;
 
@@ -59,7 +61,7 @@ namespace IlacDepoStok
                             FormYeniIlac formYeniIlac = new FormYeniIlac();
                             TextBox newtxtBarkod = (TextBox)formYeniIlac.Controls["txtBarkod"];
                             TextBox newtxtIlacAdi = (TextBox)formYeniIlac.Controls["txtIlacAdi"];
-                            newtxtBarkod.Text = txtBarkod.Text;
+                            newtxtBarkod.Text = txtBarkod.Text;                            
                             newtxtIlacAdi.Select();
                             formYeniIlac.ShowDialog();                            
                         }
@@ -78,7 +80,7 @@ namespace IlacDepoStok
         }
         private void loadIlacList()
         {
-            ilaclar = SqliteDataAccess.LoadIlaclar();
+            //ilaclar = SqliteDataAccess.LoadIlaclar();
 
             DataGridViewTextBoxColumn textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "id";
@@ -112,7 +114,38 @@ namespace IlacDepoStok
 
         }
 
-        private void btnEkle_Click(object sender, EventArgs e)
+        private void btnIlacDuzenle_Click(object sender, EventArgs e)
+        {
+            FormYeniIlac formYeniIlac = new FormYeniIlac();
+            TextBox edittxtBarkod = (TextBox)formYeniIlac.Controls["txtBarkod"];
+            TextBox edittxtIlacAdi = (TextBox)formYeniIlac.Controls["txtIlacAdi"];
+            TextBox edittxtIlacNotu = (TextBox)formYeniIlac.Controls["txtIlacNotu"];
+            TextBox edittxtIlacDusukStok = (TextBox)formYeniIlac.Controls["txtDusukStok"];
+            Label editlblIlacIdsi = (Label)formYeniIlac.Controls["lblIdsi"];
+
+            IlacModel ilac = SqliteDataAccess.findIlacbyBarkod(txtBarkod.Text);
+
+            edittxtBarkod.Text = ilac.barcode;
+            editlblIlacIdsi.Text = ilac.id.ToString();
+            edittxtIlacAdi.Text = ilac.adi;
+            edittxtIlacNotu.Text = ilac.notu;
+            int dusukStok = 0;
+            int.TryParse(ilac.dusukStok.ToString(), out dusukStok);
+            edittxtIlacDusukStok.Text = dusukStok.ToString();
+            formYeniIlac.ShowDialog();
+        }
+
+        private void btnStokGiris_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnStokCikis_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDepolar_Click(object sender, EventArgs e)
         {
 
         }

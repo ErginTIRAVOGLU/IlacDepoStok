@@ -32,11 +32,14 @@
             this.lblIlacAdi = new System.Windows.Forms.Label();
             this.txtBarkod = new System.Windows.Forms.TextBox();
             this.txtIlacAdi = new System.Windows.Forms.TextBox();
-            this.btnEkle = new System.Windows.Forms.Button();
+            this.btnStokGiris = new System.Windows.Forms.Button();
             this.dGVHareket = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblIacNot = new System.Windows.Forms.Label();
             this.lblIacNotu = new System.Windows.Forms.Label();
+            this.btnIlacDuzenle = new System.Windows.Forms.Button();
+            this.btnStokCikis = new System.Windows.Forms.Button();
+            this.btnDepolar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGVHareket)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -76,15 +79,15 @@
             this.txtIlacAdi.Size = new System.Drawing.Size(156, 20);
             this.txtIlacAdi.TabIndex = 3;
             // 
-            // btnEkle
+            // btnStokGiris
             // 
-            this.btnEkle.Location = new System.Drawing.Point(401, 20);
-            this.btnEkle.Name = "btnEkle";
-            this.btnEkle.Size = new System.Drawing.Size(75, 23);
-            this.btnEkle.TabIndex = 4;
-            this.btnEkle.Text = "Stok Giriş";
-            this.btnEkle.UseVisualStyleBackColor = true;
-            this.btnEkle.Click += new System.EventHandler(this.btnEkle_Click);
+            this.btnStokGiris.Location = new System.Drawing.Point(401, 83);
+            this.btnStokGiris.Name = "btnStokGiris";
+            this.btnStokGiris.Size = new System.Drawing.Size(75, 23);
+            this.btnStokGiris.TabIndex = 4;
+            this.btnStokGiris.Text = "Stok Giriş";
+            this.btnStokGiris.UseVisualStyleBackColor = true;
+            this.btnStokGiris.Click += new System.EventHandler(this.btnStokGiris_Click);
             // 
             // dGVHareket
             // 
@@ -124,15 +127,50 @@
             this.lblIacNotu.TabIndex = 8;
             this.lblIacNotu.Text = "İLAÇ NOTU :";
             // 
+            // btnIlacDuzenle
+            // 
+            this.btnIlacDuzenle.Enabled = false;
+            this.btnIlacDuzenle.Location = new System.Drawing.Point(401, 18);
+            this.btnIlacDuzenle.Name = "btnIlacDuzenle";
+            this.btnIlacDuzenle.Size = new System.Drawing.Size(75, 23);
+            this.btnIlacDuzenle.TabIndex = 9;
+            this.btnIlacDuzenle.Text = "Düzenle";
+            this.btnIlacDuzenle.UseVisualStyleBackColor = true;
+            this.btnIlacDuzenle.Click += new System.EventHandler(this.btnIlacDuzenle_Click);
+            // 
+            // btnStokCikis
+            // 
+            this.btnStokCikis.Location = new System.Drawing.Point(401, 138);
+            this.btnStokCikis.Name = "btnStokCikis";
+            this.btnStokCikis.Size = new System.Drawing.Size(75, 23);
+            this.btnStokCikis.TabIndex = 10;
+            this.btnStokCikis.Text = "Stok Çıkış";
+            this.btnStokCikis.UseVisualStyleBackColor = true;
+            this.btnStokCikis.Click += new System.EventHandler(this.btnStokCikis_Click);
+            // 
+            // btnDepolar
+            // 
+            this.btnDepolar.Enabled = false;
+            this.btnDepolar.Location = new System.Drawing.Point(531, 18);
+            this.btnDepolar.Name = "btnDepolar";
+            this.btnDepolar.Size = new System.Drawing.Size(75, 23);
+            this.btnDepolar.TabIndex = 11;
+            this.btnDepolar.Text = "Depolar";
+            this.btnDepolar.UseVisualStyleBackColor = true;
+            this.btnDepolar.Click += new System.EventHandler(this.btnDepolar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 410);
+            this.ClientSize = new System.Drawing.Size(642, 410);
+            this.Controls.Add(this.btnDepolar);
+            this.Controls.Add(this.btnStokCikis);
+            this.Controls.Add(this.btnIlacDuzenle);
             this.Controls.Add(this.lblIacNotu);
             this.Controls.Add(this.lblIacNot);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnEkle);
+            this.Controls.Add(this.btnStokGiris);
             this.Controls.Add(this.txtIlacAdi);
             this.Controls.Add(this.txtBarkod);
             this.Controls.Add(this.lblIlacAdi);
@@ -153,11 +191,14 @@
         private System.Windows.Forms.Label lblIlacAdi;
         private System.Windows.Forms.TextBox txtBarkod;
         private System.Windows.Forms.TextBox txtIlacAdi;
-        private System.Windows.Forms.Button btnEkle;
+        private System.Windows.Forms.Button btnStokGiris;
         private System.Windows.Forms.DataGridView dGVHareket;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblIacNot;
         private System.Windows.Forms.Label lblIacNotu;
+        private System.Windows.Forms.Button btnIlacDuzenle;
+        private System.Windows.Forms.Button btnStokCikis;
+        private System.Windows.Forms.Button btnDepolar;
     }
 }
 

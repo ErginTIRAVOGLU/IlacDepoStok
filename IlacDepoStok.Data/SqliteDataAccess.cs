@@ -25,7 +25,7 @@ namespace IlacDepoStok.Data
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into ilac(adi, barcode, notu) values (@adi, @barcode, @notu)", ilac);
+                cnn.Execute("insert into ilac(adi, barcode, notu,dusukStok) values (@adi, @barcode, @notu, @dusukStok)", ilac);
             }
         }
 
@@ -40,6 +40,14 @@ namespace IlacDepoStok.Data
             {
                 var output = cnn.Query<HareketModel>("select * from hareket where ilac_id=@ilac_id order by tarih desc", new { ilac_id = id });
                 return output.ToList();
+            }
+        }
+
+        public static void updateIlac(IlacModel ilac)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update ilac SET adi=@adi, barcode=@barcode, notu=@notu,dusukStok=@dusukStok WHERE id=@id", ilac);
             }
         }
 
