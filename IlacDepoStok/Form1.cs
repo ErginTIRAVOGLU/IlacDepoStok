@@ -147,7 +147,8 @@ namespace IlacDepoStok
 
         private void btnDepolar_Click(object sender, EventArgs e)
         {
-
+            FormDepo formDepo = new FormDepo();
+            formDepo.ShowDialog();
         }
     }
 }

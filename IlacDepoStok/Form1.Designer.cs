@@ -150,7 +150,6 @@
             // 
             // btnDepolar
             // 
-            this.btnDepolar.Enabled = false;
             this.btnDepolar.Location = new System.Drawing.Point(531, 18);
             this.btnDepolar.Name = "btnDepolar";
             this.btnDepolar.Size = new System.Drawing.Size(75, 23);

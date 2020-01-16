@@ -21,6 +21,23 @@ namespace IlacDepoStok.Data
             }
         }
 
+        public static void SaveDepo(DepoModel depo)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into depo(adi) values (@adi)", depo);
+            }
+        }
+
+        public static List<DepoModel> LoadDepolar()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<DepoModel>("select * from depo order by adi", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+
         public static void SaveIlac(IlacModel ilac)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -57,6 +74,22 @@ namespace IlacDepoStok.Data
             {
                 var output = cnn.QueryFirstOrDefault<IlacModel>("select * from ilac where barcode=@barcode", new {barcode= barkod });
                 return output;
+            }
+        }
+
+        public static void updateDepo(DepoModel depo)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update depo SET adi=@adi WHERE id=@id", depo);
+            }
+        }
+
+        public static void DeleteDepo(int depoId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("delete from depo WHERE id=@id", new { id = depoId });
             }
         }
     }
