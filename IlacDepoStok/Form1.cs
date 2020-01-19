@@ -18,7 +18,7 @@ namespace IlacDepoStok
             InitializeComponent();
             dGVHareket.AutoGenerateColumns = false;
         }
-        List<IlacModel> ilaclar = new List<IlacModel>();
+        
         private void Form1_Load(object sender, EventArgs e)
         {
          
@@ -33,45 +33,53 @@ namespace IlacDepoStok
             if(e.KeyCode==Keys.Enter)
             {
                 if(!String.IsNullOrEmpty(txtBarkod.Text))
-                { 
-                    IlacModel ilac = barkodAra(txtBarkod.Text);
-                    if(ilac != null)
-                    {
-                        txtIlacAdi.Text = ilac.adi;
-                        lblIacNot.Text = ilac.notu;
-                        ilacid = ilac.id;
-                        btnIlacDuzenle.Enabled = true;
-                        List<HareketModel> ilacHareket = new List<HareketModel>();
-                        ilacHareket = SqliteDataAccess.findHareketbyIlacId(ilac.id);
-                        dGVHareket.DataSource = ilacHareket;
-                    }
-                    else
-                    {
-                        txtIlacAdi.Text = "";
-                        lblIacNot.Text = "İlaç Kaydı Bulunamadı.";
-                        btnIlacDuzenle.Enabled = false;
-                        List<HareketModel> ilacHareket = new List<HareketModel>();
-                        dGVHareket.DataSource = ilacHareket;
-
-                        DialogResult dialogResult = new DialogResult();
-                        dialogResult = MessageBox.Show("Bu Barkod Numarasına Kayıtlı Bir İlaç Bulunamadı. Yeni İlaç Kayıt Etmek İster misiniz?", "Yeni İlaç Kayıt", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-                    
-                        if(dialogResult==DialogResult.Yes)
-                        {
-                            FormYeniIlac formYeniIlac = new FormYeniIlac();
-                            TextBox newtxtBarkod = (TextBox)formYeniIlac.Controls["txtBarkod"];
-                            TextBox newtxtIlacAdi = (TextBox)formYeniIlac.Controls["txtIlacAdi"];
-                            newtxtBarkod.Text = txtBarkod.Text;                            
-                            newtxtIlacAdi.Select();
-                            formYeniIlac.ShowDialog();                            
-                        }
-                    
-                    }
+                {
+                    ilacBul(txtBarkod.Text);
                 }
             }
         }
 
+        private void ilacBul(string BarcodeNo)
+        {
+            IlacModel ilac = barkodAra(BarcodeNo);
+            if (ilac != null)
+            {
+                btnStokGiris.Enabled = true;
+                btnStokCikis.Enabled = true;
+                txtIlacAdi.Text = ilac.adi;
+                lblIacNot.Text = ilac.notu;
+                ilacid = ilac.id;
+                btnIlacDuzenle.Enabled = true;
+                /*List<HareketModel> ilacHareket = new List<HareketModel>();
+                ilacHareket = SqliteDataAccess.findHareketbyIlacId(ilac.id);
+                dGVHareket.DataSource = ilacHareket;*/
+            }
+            else
+            {
+                btnStokGiris.Enabled = false;
+                btnStokCikis.Enabled = false;
+                txtIlacAdi.Text = "";
+                lblIacNot.Text = "İlaç Kaydı Bulunamadı.";
+                btnIlacDuzenle.Enabled = false;
+                /*List<HareketModel> ilacHareket = new List<HareketModel>();
+                dGVHareket.DataSource = ilacHareket;*/
 
+                DialogResult dialogResult = new DialogResult();
+                dialogResult = MessageBox.Show("Bu Barkod Numarasına Kayıtlı Bir İlaç Bulunamadı. Yeni İlaç Kayıt Etmek İster misiniz?", "Yeni İlaç Kayıt", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    FormYeniIlac formYeniIlac = new FormYeniIlac();
+                    TextBox newtxtBarkod = (TextBox)formYeniIlac.Controls["txtBarkod"];
+                    TextBox newtxtIlacAdi = (TextBox)formYeniIlac.Controls["txtIlacAdi"];
+                    newtxtBarkod.Text = txtBarkod.Text;
+                    newtxtIlacAdi.Select();
+                    formYeniIlac.ShowDialog();
+                    ilacBul(newtxtBarkod.Text);
+                }
+
+            }
+        }
 
         private IlacModel barkodAra(string barkod)
         {
@@ -80,8 +88,13 @@ namespace IlacDepoStok
         }
         private void loadIlacList()
         {
+            //List<IlacModel> ilaclar = new List<IlacModel>();
             //ilaclar = SqliteDataAccess.LoadIlaclar();
-
+            List<HareketModel> hModel = new List<HareketModel>();
+            dGVHareket.DataSource = hModel;
+            dGVHareket.DataSource = null;
+            dGVHareket.Columns.Clear();
+            
             DataGridViewTextBoxColumn textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "id";
             textBoxColumn.HeaderText = "No";
@@ -96,22 +109,33 @@ namespace IlacDepoStok
             textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "yon";
             textBoxColumn.HeaderText = "Yön";
+            dGVHareket.Columns.Add(textBoxColumn);           
+
+            textBoxColumn = new DataGridViewTextBoxColumn();
+            textBoxColumn.DataPropertyName = "adi";
+            textBoxColumn.HeaderText = "Ilac";
             dGVHareket.Columns.Add(textBoxColumn);
 
             textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "tarih";
             textBoxColumn.HeaderText = "Tarih";
-            dGVHareket.Columns.Add(textBoxColumn);
+            textBoxColumn.DefaultCellStyle.Format = "yyyy-MM-dd";
 
-            textBoxColumn = new DataGridViewTextBoxColumn();
-            textBoxColumn.DataPropertyName = "fiyat";
-            textBoxColumn.HeaderText = "Fiyat";
             dGVHareket.Columns.Add(textBoxColumn);
+            
+          
+            hModel = SqliteDataAccess.findHareketbyTarih(DateTime.Now.ToString("yyyy-MM-dd"));
+            dGVHareket.DataSource = hModel;
         }
 
         private void txtBarkod_TextChanged(object sender, EventArgs e)
         {
-
+            btnIlacDuzenle.Enabled = false;
+            btnStokGiris.Enabled = false;
+            btnStokCikis.Enabled = false;
+            txtIlacAdi.Text = "";
+            lblIacNot.Text = "";
+            ilacid = 0;
         }
 
         private void btnIlacDuzenle_Click(object sender, EventArgs e)
@@ -121,23 +145,31 @@ namespace IlacDepoStok
             TextBox edittxtIlacAdi = (TextBox)formYeniIlac.Controls["txtIlacAdi"];
             TextBox edittxtIlacNotu = (TextBox)formYeniIlac.Controls["txtIlacNotu"];
             TextBox edittxtIlacDusukStok = (TextBox)formYeniIlac.Controls["txtDusukStok"];
-            Label editlblIlacIdsi = (Label)formYeniIlac.Controls["lblIdsi"];
-
+             
             IlacModel ilac = SqliteDataAccess.findIlacbyBarkod(txtBarkod.Text);
 
             edittxtBarkod.Text = ilac.barcode;
-            editlblIlacIdsi.Text = ilac.id.ToString();
+            formYeniIlac.lblIdsi = int.Parse(ilac.id.ToString());
             edittxtIlacAdi.Text = ilac.adi;
             edittxtIlacNotu.Text = ilac.notu;
             int dusukStok = 0;
             int.TryParse(ilac.dusukStok.ToString(), out dusukStok);
             edittxtIlacDusukStok.Text = dusukStok.ToString();
             formYeniIlac.ShowDialog();
+            ilacBul(ilac.barcode);
         }
 
         private void btnStokGiris_Click(object sender, EventArgs e)
         {
+            FormStokGiris frmStokGiris = new FormStokGiris();
+            Label ilacAdi = (Label)frmStokGiris.Controls["lblIlacAd"];
 
+            IlacModel ilac = SqliteDataAccess.findIlacbyBarkod(txtBarkod.Text);
+
+            ilacAdi.Text = ilac.adi;
+            frmStokGiris.IlacId = ilacid;
+            frmStokGiris.ShowDialog();
+            loadIlacList();
         }
 
         private void btnStokCikis_Click(object sender, EventArgs e)

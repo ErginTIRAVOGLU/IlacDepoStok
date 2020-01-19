@@ -13,10 +13,10 @@ namespace IlacDepoStok.Data
 		
 		public string yon { get; set; }
 		public int adet { get; set; }
-		public int fiyat { get; set; }
+		 
 		public int ilac_id { get; set; }
 		public string tarih { get; set; }
-
+		public string adi { get; set; }
 		public virtual IlacModel ilac {get; set;}
     }
 }

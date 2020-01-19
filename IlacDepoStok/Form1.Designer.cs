@@ -81,6 +81,7 @@
             // 
             // btnStokGiris
             // 
+            this.btnStokGiris.Enabled = false;
             this.btnStokGiris.Location = new System.Drawing.Point(401, 83);
             this.btnStokGiris.Name = "btnStokGiris";
             this.btnStokGiris.Size = new System.Drawing.Size(75, 23);
@@ -97,7 +98,7 @@
             this.dGVHareket.Location = new System.Drawing.Point(6, 19);
             this.dGVHareket.Name = "dGVHareket";
             this.dGVHareket.ReadOnly = true;
-            this.dGVHareket.Size = new System.Drawing.Size(448, 180);
+            this.dGVHareket.Size = new System.Drawing.Size(572, 261);
             this.dGVHareket.TabIndex = 5;
             // 
             // groupBox1
@@ -105,7 +106,7 @@
             this.groupBox1.Controls.Add(this.dGVHareket);
             this.groupBox1.Location = new System.Drawing.Point(22, 177);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(463, 205);
+            this.groupBox1.Size = new System.Drawing.Size(584, 286);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Stok Hareket";
@@ -140,6 +141,7 @@
             // 
             // btnStokCikis
             // 
+            this.btnStokCikis.Enabled = false;
             this.btnStokCikis.Location = new System.Drawing.Point(401, 138);
             this.btnStokCikis.Name = "btnStokCikis";
             this.btnStokCikis.Size = new System.Drawing.Size(75, 23);
@@ -162,7 +164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(642, 410);
+            this.ClientSize = new System.Drawing.Size(642, 475);
             this.Controls.Add(this.btnDepolar);
             this.Controls.Add(this.btnStokCikis);
             this.Controls.Add(this.btnIlacDuzenle);

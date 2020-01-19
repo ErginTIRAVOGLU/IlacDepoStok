@@ -13,6 +13,7 @@ namespace IlacDepoStok
 {
     public partial class FormYeniIlac : Form
     {
+        public int? lblIdsi { get; set; }
         public FormYeniIlac()
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace IlacDepoStok
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            if(String.IsNullOrEmpty(lblIdsi.Text))
+            if(lblIdsi==null)
             {
                 IlacModel ilacModel = new IlacModel();
                 int dusukStok = 0;
@@ -47,7 +48,7 @@ namespace IlacDepoStok
                 int.TryParse(txtDusukStok.Text, out dusukStok);
                 ilac.dusukStok = dusukStok;
                 ilac.notu = txtIlacNotu.Text;
-                ilac.id = int.Parse(lblIdsi.Text);
+                ilac.id =int.Parse(lblIdsi.ToString());
                 SqliteDataAccess.updateIlac(ilac);
             }
             

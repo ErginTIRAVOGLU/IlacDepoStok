@@ -38,6 +38,14 @@ namespace IlacDepoStok.Data
             }
         }
 
+        public static void SaveHareket(HareketModel hModel)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into hareket(yon, adet, ilac_id,tarih) values (@yon, @adet, @ilac_id, @tarih)", hModel);
+            }
+        }
+        
         public static void SaveIlac(IlacModel ilac)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -91,6 +99,21 @@ namespace IlacDepoStok.Data
             {
                 cnn.Execute("delete from depo WHERE id=@id", new { id = depoId });
             }
+        }
+
+        public static List<HareketModel> findHareketbyTarih(string htarih)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<HareketModel>("select hareket.id,date(hareket.tarih) as tarih,hareket.yon, hareket.adet, hareket.ilac_id,ilac.adi from hareket inner join ilac on hareket.ilac_id=ilac.id where tarih=@tarih order by date(tarih) desc, hareket.id desc", new { tarih = htarih });
+                return output.ToList();
+            }
+        }
+
+        private string DateTimeSQLite(DateTime datetime)
+        {
+            string dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";
+            return string.Format(dateTimeFormat, datetime.Year, datetime.Month, datetime.Day, datetime.Hour, datetime.Minute, datetime.Second, datetime.Millisecond);
         }
     }
 }
