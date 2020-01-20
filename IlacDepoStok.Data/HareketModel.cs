@@ -16,7 +16,9 @@ namespace IlacDepoStok.Data
 		 
 		public int ilac_id { get; set; }
 		public string tarih { get; set; }
-		public string adi { get; set; }
-		public virtual IlacModel ilac {get; set;}
-    }
+		public string ilac_adi { get; set; }
+		public int depo_id { get; set; }
+		public string depo_adi { get; set; }
+
+	}
 }

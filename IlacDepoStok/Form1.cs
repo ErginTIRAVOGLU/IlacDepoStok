@@ -102,6 +102,11 @@ namespace IlacDepoStok
             dGVHareket.Columns.Add(textBoxColumn);
 
             textBoxColumn = new DataGridViewTextBoxColumn();
+            textBoxColumn.DataPropertyName = "ilac_adi";
+            textBoxColumn.HeaderText = "Ilac";
+            dGVHareket.Columns.Add(textBoxColumn);
+
+            textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "adet";
             textBoxColumn.HeaderText = "Adet";
             dGVHareket.Columns.Add(textBoxColumn);
@@ -109,11 +114,12 @@ namespace IlacDepoStok
             textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "yon";
             textBoxColumn.HeaderText = "Yön";
-            dGVHareket.Columns.Add(textBoxColumn);           
+            dGVHareket.Columns.Add(textBoxColumn);
+
 
             textBoxColumn = new DataGridViewTextBoxColumn();
-            textBoxColumn.DataPropertyName = "adi";
-            textBoxColumn.HeaderText = "Ilac";
+            textBoxColumn.DataPropertyName = "depo_adi";
+            textBoxColumn.HeaderText = "Depo";
             dGVHareket.Columns.Add(textBoxColumn);
 
             textBoxColumn = new DataGridViewTextBoxColumn();
@@ -174,7 +180,15 @@ namespace IlacDepoStok
 
         private void btnStokCikis_Click(object sender, EventArgs e)
         {
+            FormStokCikis frmStokCikis = new FormStokCikis();
+            Label ilacAdi = (Label)frmStokCikis.Controls["lblIlacAd"];
 
+            IlacModel ilac = SqliteDataAccess.findIlacbyBarkod(txtBarkod.Text);
+
+            ilacAdi.Text = ilac.adi;
+            frmStokCikis.IlacId = ilacid;
+            frmStokCikis.ShowDialog();
+            loadIlacList();
         }
 
         private void btnDepolar_Click(object sender, EventArgs e)

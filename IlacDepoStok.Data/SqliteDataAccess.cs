@@ -42,7 +42,7 @@ namespace IlacDepoStok.Data
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into hareket(yon, adet, ilac_id,tarih) values (@yon, @adet, @ilac_id, @tarih)", hModel);
+                cnn.Execute("insert into hareket(yon, adet, ilac_id, depo_id, tarih) values (@yon, @adet, @ilac_id, @depo_id, @tarih)", hModel);
             }
         }
         
@@ -105,7 +105,7 @@ namespace IlacDepoStok.Data
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<HareketModel>("select hareket.id,date(hareket.tarih) as tarih,hareket.yon, hareket.adet, hareket.ilac_id,ilac.adi from hareket inner join ilac on hareket.ilac_id=ilac.id where tarih=@tarih order by date(tarih) desc, hareket.id desc", new { tarih = htarih });
+                var output = cnn.Query<HareketModel>("select hareket.id, date(hareket.tarih) as tarih, hareket.yon, hareket.adet, hareket.ilac_id, hareket.depo_id,ilac.adi as ilac_adi, depo.adi AS depo_adi from hareket inner join ilac on ilac.id=hareket.ilac_id inner join depo on depo.id=hareket.depo_id where tarih=@tarih order by date(tarih) desc, hareket.id desc", new { tarih = htarih });
                 return output.ToList();
             }
         }

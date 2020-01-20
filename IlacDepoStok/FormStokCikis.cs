@@ -11,15 +11,15 @@ using System.Windows.Forms;
 
 namespace IlacDepoStok
 {
-    public partial class FormStokGiris : Form
+    public partial class FormStokCikis : Form
     {
         public int IlacId { get; set; }
-        public FormStokGiris()
+        public FormStokCikis()
         {
             InitializeComponent();
         }
 
-        private void FormStokGiris_Load(object sender, EventArgs e)
+        private void FormStokCikis_Load(object sender, EventArgs e)
         {
             cmbDepo.DisplayMember = "adi";
             cmbDepo.ValueMember = "id";
@@ -36,7 +36,7 @@ namespace IlacDepoStok
             HareketModel hModel = new HareketModel();
             hModel.adet = int.Parse(txtAdet.Text);
             hModel.ilac_id = IlacId;
-            hModel.yon = "G";
+            hModel.yon = "C";
             hModel.depo_id = ((DepoModel)(cmbDepo.SelectedItem)).id;
            
             hModel.tarih =  dtpTarih.Value.ToString("yyyy-MM-dd");
