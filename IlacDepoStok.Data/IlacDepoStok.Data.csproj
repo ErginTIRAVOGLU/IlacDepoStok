@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="HareketModel.cs" />
     <Compile Include="DepoModel.cs" />
+    <Compile Include="StokModel.cs" />
     <Compile Include="IlacModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqliteDataAccess.cs" />

@@ -93,6 +93,15 @@ namespace IlacDepoStok.Data
             }
         }
 
+        public static int findIlacStokbyBarkod(string barkod)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<int>("select (IFNULL(i2.giren,0)-IFNULL(i3.cikan,0)) as Stok from ilac as i1 left join (select ilac.id, IFNULL(sum(adet),0)as giren from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'G' GROUP by ilac_id) as i2 on i2.id = i1.id left join (select ilac.id, IFNULL(sum(adet),0) as cikan from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'C' GROUP by ilac_id) as i3 on i3.id = i1.id Where barcode=@barcode", new { barcode = barkod });
+                return output.FirstOrDefault();
+            }
+        }
+
         public static void DeleteDepo(int depoId)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -109,6 +118,25 @@ namespace IlacDepoStok.Data
                 return output.ToList();
             }
         }
+
+        public static List<StokModel> stokUyari()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<StokModel>("select i1.*, IFNULL(i2.giren,0)as gireni, IFNULL(i3.cikan,0) as cikani, (IFNULL(i2.giren,0)-IFNULL(i3.cikan,0)) as Stok from ilac as i1 left join (select ilac.id, IFNULL(sum(adet),0) as giren from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'G' GROUP by ilac_id) as i2 on i2.id = i1.id left join (select ilac.id, IFNULL(sum(adet),0) as cikan from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'C' GROUP by ilac_id) as i3 on i3.id = i1.id where dusukStok >= kalan");
+                return output.ToList();
+            }
+        }
+
+        public static List<StokModel> stokDurumu()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<StokModel>("select i1.*, IFNULL(i2.giren,0)as gireni, IFNULL(i3.cikan,0) as cikani, (IFNULL(i2.giren,0)-IFNULL(i3.cikan,0)) as Stok from ilac as i1 left join (select ilac.id, IFNULL(sum(adet),0)as giren from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'G' GROUP by ilac_id) as i2 on i2.id = i1.id left join (select ilac.id, IFNULL(sum(adet),0) as cikan from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'C' GROUP by ilac_id) as i3 on i3.id = i1.id");
+                return output.ToList();
+            }
+        }
+
 
         private string DateTimeSQLite(DateTime datetime)
         {

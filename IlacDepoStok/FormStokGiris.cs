@@ -39,7 +39,7 @@ namespace IlacDepoStok
             hModel.yon = "G";
             hModel.depo_id = ((DepoModel)(cmbDepo.SelectedItem)).id;
            
-            hModel.tarih =  dtpTarih.Value.ToString("yyyy-MM-dd");
+            hModel.tarih = DateTime.Today.ToString("yyyy-MM-dd");// dtpTarih.Value.ToString("yyyy-MM-dd");
             SqliteDataAccess.SaveHareket(hModel);
             this.Close();
         }

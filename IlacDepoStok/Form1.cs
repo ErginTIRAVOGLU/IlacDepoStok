@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,9 +22,10 @@ namespace IlacDepoStok
         
         private void Form1_Load(object sender, EventArgs e)
         {
-         
-            
+           
+
             loadIlacList();
+            
         }
 
         public int ilacid { get; set; }
@@ -42,6 +44,7 @@ namespace IlacDepoStok
         private void ilacBul(string BarcodeNo)
         {
             IlacModel ilac = barkodAra(BarcodeNo);
+            int kalanIlacStogu = kalanStok(BarcodeNo);
             if (ilac != null)
             {
                 btnStokGiris.Enabled = true;
@@ -49,6 +52,7 @@ namespace IlacDepoStok
                 txtIlacAdi.Text = ilac.adi;
                 lblIacNot.Text = ilac.notu;
                 ilacid = ilac.id;
+                lblKalanStok.Text = kalanIlacStogu.ToString();
                 btnIlacDuzenle.Enabled = true;
                 /*List<HareketModel> ilacHareket = new List<HareketModel>();
                 ilacHareket = SqliteDataAccess.findHareketbyIlacId(ilac.id);
@@ -86,15 +90,21 @@ namespace IlacDepoStok
             IlacModel ilac = SqliteDataAccess.findIlacbyBarkod(barkod);
             return ilac;
         }
+        private int kalanStok(string barkod)
+        {
+            int ilacStok = SqliteDataAccess.findIlacStokbyBarkod(barkod);
+            return ilacStok;
+        }
+
         private void loadIlacList()
         {
-            //List<IlacModel> ilaclar = new List<IlacModel>();
-            //ilaclar = SqliteDataAccess.LoadIlaclar();
             List<HareketModel> hModel = new List<HareketModel>();
-            dGVHareket.DataSource = hModel;
+            //dGVHareket.DataSource = hModel;
             dGVHareket.DataSource = null;
             dGVHareket.Columns.Clear();
-            
+            //List<IlacModel> ilaclar = new List<IlacModel>();
+            //ilaclar = SqliteDataAccess.LoadIlaclar();
+
             DataGridViewTextBoxColumn textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "id";
             textBoxColumn.HeaderText = "No";
@@ -128,12 +138,12 @@ namespace IlacDepoStok
             textBoxColumn.DefaultCellStyle.Format = "yyyy-MM-dd";
 
             dGVHareket.Columns.Add(textBoxColumn);
-            
-          
-            hModel = SqliteDataAccess.findHareketbyTarih(DateTime.Now.ToString("yyyy-MM-dd"));
+hModel = SqliteDataAccess.findHareketbyTarih(DateTime.Now.ToString("yyyy-MM-dd"));
+           
+
             dGVHareket.DataSource = hModel;
         }
-
+ 
         private void txtBarkod_TextChanged(object sender, EventArgs e)
         {
             btnIlacDuzenle.Enabled = false;
@@ -195,6 +205,12 @@ namespace IlacDepoStok
         {
             FormDepo formDepo = new FormDepo();
             formDepo.ShowDialog();
+        }
+
+        private void btnStokGor_Click(object sender, EventArgs e)
+        {
+            FormStok formStok = new FormStok();
+            formStok.ShowDialog();
         }
     }
 }

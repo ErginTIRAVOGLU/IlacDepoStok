@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lblBarcode = new System.Windows.Forms.Label();
             this.lblIlacAdi = new System.Windows.Forms.Label();
             this.txtBarkod = new System.Windows.Forms.TextBox();
@@ -40,6 +41,9 @@
             this.btnIlacDuzenle = new System.Windows.Forms.Button();
             this.btnStokCikis = new System.Windows.Forms.Button();
             this.btnDepolar = new System.Windows.Forms.Button();
+            this.btnStokGor = new System.Windows.Forms.Button();
+            this.lblKalanStogu = new System.Windows.Forms.Label();
+            this.lblKalanStok = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dGVHareket)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -104,7 +108,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dGVHareket);
-            this.groupBox1.Location = new System.Drawing.Point(22, 177);
+            this.groupBox1.Location = new System.Drawing.Point(22, 219);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(584, 286);
             this.groupBox1.TabIndex = 6;
@@ -160,11 +164,41 @@
             this.btnDepolar.UseVisualStyleBackColor = true;
             this.btnDepolar.Click += new System.EventHandler(this.btnDepolar_Click);
             // 
+            // btnStokGor
+            // 
+            this.btnStokGor.Location = new System.Drawing.Point(531, 53);
+            this.btnStokGor.Name = "btnStokGor";
+            this.btnStokGor.Size = new System.Drawing.Size(75, 23);
+            this.btnStokGor.TabIndex = 12;
+            this.btnStokGor.Text = "Stok Gör";
+            this.btnStokGor.UseVisualStyleBackColor = true;
+            this.btnStokGor.Click += new System.EventHandler(this.btnStokGor_Click);
+            // 
+            // lblKalanStogu
+            // 
+            this.lblKalanStogu.AutoSize = true;
+            this.lblKalanStogu.Location = new System.Drawing.Point(12, 172);
+            this.lblKalanStogu.Name = "lblKalanStogu";
+            this.lblKalanStogu.Size = new System.Drawing.Size(80, 13);
+            this.lblKalanStogu.TabIndex = 13;
+            this.lblKalanStogu.Text = "KALAN STOK :";
+            // 
+            // lblKalanStok
+            // 
+            this.lblKalanStok.AutoSize = true;
+            this.lblKalanStok.Location = new System.Drawing.Point(99, 172);
+            this.lblKalanStok.Name = "lblKalanStok";
+            this.lblKalanStok.Size = new System.Drawing.Size(0, 13);
+            this.lblKalanStok.TabIndex = 14;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(642, 475);
+            this.ClientSize = new System.Drawing.Size(642, 517);
+            this.Controls.Add(this.lblKalanStok);
+            this.Controls.Add(this.lblKalanStogu);
+            this.Controls.Add(this.btnStokGor);
             this.Controls.Add(this.btnDepolar);
             this.Controls.Add(this.btnStokCikis);
             this.Controls.Add(this.btnIlacDuzenle);
@@ -176,6 +210,7 @@
             this.Controls.Add(this.txtBarkod);
             this.Controls.Add(this.lblIlacAdi);
             this.Controls.Add(this.lblBarcode);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "İlaç Depo Stok";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -200,6 +235,9 @@
         private System.Windows.Forms.Button btnIlacDuzenle;
         private System.Windows.Forms.Button btnStokCikis;
         private System.Windows.Forms.Button btnDepolar;
+        private System.Windows.Forms.Button btnStokGor;
+        private System.Windows.Forms.Label lblKalanStogu;
+        private System.Windows.Forms.Label lblKalanStok;
     }
 }
 

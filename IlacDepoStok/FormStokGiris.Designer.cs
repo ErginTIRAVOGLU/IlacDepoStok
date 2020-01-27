@@ -84,6 +84,7 @@
             this.dtpTarih.Name = "dtpTarih";
             this.dtpTarih.Size = new System.Drawing.Size(120, 20);
             this.dtpTarih.TabIndex = 6;
+            this.dtpTarih.Visible = false;
             // 
             // lblTarih
             // 
@@ -93,6 +94,7 @@
             this.lblTarih.Size = new System.Drawing.Size(81, 13);
             this.lblTarih.TabIndex = 7;
             this.lblTarih.Text = "GİRİŞ TARİHİ :";
+            this.lblTarih.Visible = false;
             // 
             // lblIlacAdi
             // 
