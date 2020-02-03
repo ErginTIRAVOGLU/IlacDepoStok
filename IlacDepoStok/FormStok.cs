@@ -74,5 +74,15 @@ namespace IlacDepoStok
 
             dGVStok.DataSource = sModel;
         }
+
+        private void FormStok_Load(object sender, EventArgs e)
+        {
+            cmbDepo.DisplayMember = "adi";
+            cmbDepo.ValueMember = "id";
+            List<DepoModel> depolar = SqliteDataAccess.LoadDepolar();
+            depolar.Add(new DepoModel() { adi = "Tüm Depolar", id = 0 });
+            cmbDepo.DataSource = depolar;
+            cmbDepo.SelectedIndex = cmbDepo.Items.Count-1;
+        }
     }
 }

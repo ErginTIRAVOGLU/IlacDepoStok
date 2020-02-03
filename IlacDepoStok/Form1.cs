@@ -64,6 +64,7 @@ namespace IlacDepoStok
                 btnStokCikis.Enabled = false;
                 txtIlacAdi.Text = "";
                 lblIacNot.Text = "İlaç Kaydı Bulunamadı.";
+                lblKalanStok.Text = "";
                 btnIlacDuzenle.Enabled = false;
                 /*List<HareketModel> ilacHareket = new List<HareketModel>();
                 dGVHareket.DataSource = ilacHareket;*/
@@ -151,6 +152,7 @@ hModel = SqliteDataAccess.findHareketbyTarih(DateTime.Now.ToString("yyyy-MM-dd")
             btnStokCikis.Enabled = false;
             txtIlacAdi.Text = "";
             lblIacNot.Text = "";
+            lblKalanStok.Text = "";
             ilacid = 0;
         }
 
@@ -186,6 +188,8 @@ hModel = SqliteDataAccess.findHareketbyTarih(DateTime.Now.ToString("yyyy-MM-dd")
             frmStokGiris.IlacId = ilacid;
             frmStokGiris.ShowDialog();
             loadIlacList();
+            int kalanIlacStogu = kalanStok(txtBarkod.Text);
+            lblKalanStok.Text = kalanIlacStogu.ToString();
         }
 
         private void btnStokCikis_Click(object sender, EventArgs e)
@@ -199,6 +203,8 @@ hModel = SqliteDataAccess.findHareketbyTarih(DateTime.Now.ToString("yyyy-MM-dd")
             frmStokCikis.IlacId = ilacid;
             frmStokCikis.ShowDialog();
             loadIlacList();
+            int kalanIlacStogu = kalanStok(txtBarkod.Text);
+            lblKalanStok.Text = kalanIlacStogu.ToString();
         }
 
         private void btnDepolar_Click(object sender, EventArgs e)
