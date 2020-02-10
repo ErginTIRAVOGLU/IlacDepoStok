@@ -53,27 +53,7 @@ namespace IlacDepoStok
             this.Close();
         }
 
-        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void StatusBarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-             
-        }
+      
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -121,6 +101,28 @@ namespace IlacDepoStok
         {
             FormStok formStok = new FormStok();
             formStok.ShowDialog();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.MdiParent = this;
+
+            form1.Show();
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+
+            FormCari formCari = new FormCari();
+            formCari.MdiParent = this;
+
+            formCari.Show();
         }
     }
 }

@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lblBarcode = new System.Windows.Forms.Label();
             this.lblIlacAdi = new System.Windows.Forms.Label();
             this.txtBarkod = new System.Windows.Forms.TextBox();
             this.txtIlacAdi = new System.Windows.Forms.TextBox();
             this.btnStokGiris = new System.Windows.Forms.Button();
+            this.ımageList1 = new System.Windows.Forms.ImageList(this.components);
             this.dGVHareket = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblIacNot = new System.Windows.Forms.Label();
@@ -84,13 +86,30 @@
             // btnStokGiris
             // 
             this.btnStokGiris.Enabled = false;
-            this.btnStokGiris.Location = new System.Drawing.Point(401, 83);
+            this.btnStokGiris.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnStokGiris.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnStokGiris.ImageIndex = 2;
+            this.btnStokGiris.ImageList = this.ımageList1;
+            this.btnStokGiris.Location = new System.Drawing.Point(401, 130);
             this.btnStokGiris.Name = "btnStokGiris";
-            this.btnStokGiris.Size = new System.Drawing.Size(75, 23);
+            this.btnStokGiris.Size = new System.Drawing.Size(75, 75);
             this.btnStokGiris.TabIndex = 4;
-            this.btnStokGiris.Text = "Stok Giriş";
-            this.btnStokGiris.UseVisualStyleBackColor = true;
+            this.btnStokGiris.Text = "Stok &Giriş";
+            this.btnStokGiris.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnStokGiris.UseCompatibleTextRendering = true;
+            this.btnStokGiris.UseVisualStyleBackColor = false;
             this.btnStokGiris.Click += new System.EventHandler(this.btnStokGiris_Click);
+            // 
+            // ımageList1
+            // 
+            this.ımageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ımageList1.ImageStream")));
+            this.ımageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.ımageList1.Images.SetKeyName(0, "logout-icon.png");
+            this.ımageList1.Images.SetKeyName(1, "export-icon.png");
+            this.ımageList1.Images.SetKeyName(2, "import-icon.png");
+            this.ımageList1.Images.SetKeyName(3, "Button-Close-icon.png");
+            this.ımageList1.Images.SetKeyName(4, "Button-Add-icon.png");
+            this.ımageList1.Images.SetKeyName(5, "inventory-maintenance-icon.png");
             // 
             // dGVHareket
             // 
@@ -100,7 +119,7 @@
             this.dGVHareket.Location = new System.Drawing.Point(6, 19);
             this.dGVHareket.Name = "dGVHareket";
             this.dGVHareket.ReadOnly = true;
-            this.dGVHareket.Size = new System.Drawing.Size(572, 261);
+            this.dGVHareket.Size = new System.Drawing.Size(734, 261);
             this.dGVHareket.TabIndex = 5;
             // 
             // groupBox1
@@ -108,7 +127,7 @@
             this.groupBox1.Controls.Add(this.dGVHareket);
             this.groupBox1.Location = new System.Drawing.Point(22, 219);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(584, 286);
+            this.groupBox1.Size = new System.Drawing.Size(746, 286);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Stok Hareket";
@@ -133,23 +152,29 @@
             // btnIlacDuzenle
             // 
             this.btnIlacDuzenle.Enabled = false;
-            this.btnIlacDuzenle.Location = new System.Drawing.Point(401, 18);
+            this.btnIlacDuzenle.Location = new System.Drawing.Point(401, 4);
             this.btnIlacDuzenle.Name = "btnIlacDuzenle";
-            this.btnIlacDuzenle.Size = new System.Drawing.Size(75, 23);
+            this.btnIlacDuzenle.Size = new System.Drawing.Size(75, 53);
             this.btnIlacDuzenle.TabIndex = 9;
-            this.btnIlacDuzenle.Text = "Düzenle";
+            this.btnIlacDuzenle.Text = "&Düzenle";
+            this.btnIlacDuzenle.UseCompatibleTextRendering = true;
             this.btnIlacDuzenle.UseVisualStyleBackColor = true;
             this.btnIlacDuzenle.Click += new System.EventHandler(this.btnIlacDuzenle_Click);
             // 
             // btnStokCikis
             // 
             this.btnStokCikis.Enabled = false;
-            this.btnStokCikis.Location = new System.Drawing.Point(401, 138);
+            this.btnStokCikis.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnStokCikis.ImageIndex = 1;
+            this.btnStokCikis.ImageList = this.ımageList1;
+            this.btnStokCikis.Location = new System.Drawing.Point(493, 130);
             this.btnStokCikis.Name = "btnStokCikis";
-            this.btnStokCikis.Size = new System.Drawing.Size(75, 23);
+            this.btnStokCikis.Size = new System.Drawing.Size(75, 75);
             this.btnStokCikis.TabIndex = 10;
-            this.btnStokCikis.Text = "Stok Çıkış";
-            this.btnStokCikis.UseVisualStyleBackColor = true;
+            this.btnStokCikis.Text = "Stok &Çıkış";
+            this.btnStokCikis.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnStokCikis.UseCompatibleTextRendering = true;
+            this.btnStokCikis.UseVisualStyleBackColor = false;
             this.btnStokCikis.Click += new System.EventHandler(this.btnStokCikis_Click);
             // 
             // lblKalanStogu
@@ -173,7 +198,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(642, 517);
+            this.ClientSize = new System.Drawing.Size(780, 517);
             this.Controls.Add(this.lblKalanStok);
             this.Controls.Add(this.lblKalanStogu);
             this.Controls.Add(this.btnStokCikis);
@@ -188,7 +213,7 @@
             this.Controls.Add(this.lblBarcode);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "İlaç Depo Stok";
+            this.Text = "İlaç";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dGVHareket)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -212,6 +237,7 @@
         private System.Windows.Forms.Button btnStokCikis;
         private System.Windows.Forms.Label lblKalanStogu;
         private System.Windows.Forms.Label lblKalanStok;
+        private System.Windows.Forms.ImageList ımageList1;
     }
 }
 

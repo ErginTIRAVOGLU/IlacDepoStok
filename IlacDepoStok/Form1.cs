@@ -115,6 +115,7 @@ namespace IlacDepoStok
             textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "ilac_adi";
             textBoxColumn.HeaderText = "Ilac";
+            textBoxColumn.Width = 250;
             dGVHareket.Columns.Add(textBoxColumn);
 
             textBoxColumn = new DataGridViewTextBoxColumn();
