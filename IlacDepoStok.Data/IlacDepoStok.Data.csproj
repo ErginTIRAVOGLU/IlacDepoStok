@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="HareketModel.cs" />
     <Compile Include="DepoModel.cs" />
+    <Compile Include="KategoriModel.cs" />
     <Compile Include="StokModel.cs" />
     <Compile Include="IlacModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -112,6 +112,18 @@
     <Compile Include="FormCari.Designer.cs">
       <DependentUpon>FormCari.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormKategoriYeni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKategoriYeni.Designer.cs">
+      <DependentUpon>FormKategoriYeni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCariYeni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCariYeni.Designer.cs">
+      <DependentUpon>FormCariYeni.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormDepo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +167,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormCari.resx">
       <DependentUpon>FormCari.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKategoriYeni.resx">
+      <DependentUpon>FormKategoriYeni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCariYeni.resx">
+      <DependentUpon>FormCariYeni.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDepo.resx">
       <DependentUpon>FormDepo.cs</DependentUpon>

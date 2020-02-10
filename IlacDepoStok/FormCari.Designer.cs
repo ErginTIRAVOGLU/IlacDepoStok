@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -44,31 +41,6 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(534, 108);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Adı Soyadı : ";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(606, 105);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(631, 168);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Kaydet";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // listBox1
             // 
@@ -96,7 +68,7 @@
             this.button2.Text = "Ekle";
             this.button2.UseCompatibleTextRendering = true;
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -108,7 +80,6 @@
             this.button3.Text = "Düzenle";
             this.button3.UseCompatibleTextRendering = true;
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Visible = false;
             // 
             // button4
             // 
@@ -120,7 +91,6 @@
             this.button4.Text = "Sil";
             this.button4.UseCompatibleTextRendering = true;
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Visible = false;
             // 
             // button5
             // 
@@ -132,7 +102,6 @@
             this.button5.Text = "Sil";
             this.button5.UseCompatibleTextRendering = true;
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Visible = false;
             // 
             // button6
             // 
@@ -144,7 +113,6 @@
             this.button6.Text = "Düzenle";
             this.button6.UseCompatibleTextRendering = true;
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Visible = false;
             // 
             // button7
             // 
@@ -156,7 +124,6 @@
             this.button7.Text = "Ekle";
             this.button7.UseCompatibleTextRendering = true;
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Visible = false;
             // 
             // groupBox1
             // 
@@ -169,7 +136,7 @@
             this.groupBox1.Size = new System.Drawing.Size(197, 377);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Cari Adi";
             // 
             // groupBox2
             // 
@@ -182,7 +149,7 @@
             this.groupBox2.Size = new System.Drawing.Size(200, 377);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "Kategori Adı";
             // 
             // FormCari
             // 
@@ -191,24 +158,16 @@
             this.ClientSize = new System.Drawing.Size(800, 561);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
             this.Name = "FormCari";
             this.Text = "Cari";
             this.Load += new System.EventHandler(this.FormCari_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button button2;

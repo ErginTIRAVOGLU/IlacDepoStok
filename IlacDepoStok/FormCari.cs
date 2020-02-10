@@ -20,5 +20,11 @@ namespace IlacDepoStok
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormKategoriYeni formKategoriYeni = new FormKategoriYeni();
+            formKategoriYeni.ShowDialog();
+        }
     }
 }
