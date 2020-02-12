@@ -7,7 +7,7 @@ namespace IlacDepoStok.Data
 {
     public class KategoriModel
     {
-        public int Kategori_Id { get; set; }
-        public string Kategori_Adi { get; set; }
+        public int cari_kategori_id { get; set; }
+        public string cari_kategori_adi { get; set; }
     }
 }

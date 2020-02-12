@@ -148,6 +148,29 @@ namespace IlacDepoStok.Data
             }
         }
 
+        public static void SaveCariKategori(KategoriModel kategori)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into cari_kategori(cari_kategori_adi) values (@cari_kategori_adi)", kategori);
+            }
+        }
+        public static void UpdateCariKategori(KategoriModel kategori)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update cari_kategori SET cari_kategori_adi=@cari_kategori_adi WHERE cari_kategori_id=@cari_kategori_id", kategori);
+            }            
+        }
+        
+        public static List<KategoriModel> LoadCariKategoriler()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<KategoriModel>("select * from cari_kategori order by cari_kategori_adi", new DynamicParameters());
+                return output.ToList();
+            }
+        }
 
         private string DateTimeSQLite(DateTime datetime)
         {

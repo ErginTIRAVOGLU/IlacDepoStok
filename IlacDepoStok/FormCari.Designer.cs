@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.lstBoxKategori = new System.Windows.Forms.ListBox();
+            this.lstBoxCari = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -42,21 +42,21 @@
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listBox1
+            // lstBoxKategori
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(6, 52);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(181, 316);
-            this.listBox1.TabIndex = 3;
+            this.lstBoxKategori.FormattingEnabled = true;
+            this.lstBoxKategori.Location = new System.Drawing.Point(6, 52);
+            this.lstBoxKategori.Name = "lstBoxKategori";
+            this.lstBoxKategori.Size = new System.Drawing.Size(181, 316);
+            this.lstBoxKategori.TabIndex = 3;
             // 
-            // listBox2
+            // lstBoxCari
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(6, 52);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(181, 316);
-            this.listBox2.TabIndex = 4;
+            this.lstBoxCari.FormattingEnabled = true;
+            this.lstBoxCari.Location = new System.Drawing.Point(6, 52);
+            this.lstBoxCari.Name = "lstBoxCari";
+            this.lstBoxCari.Size = new System.Drawing.Size(181, 316);
+            this.lstBoxCari.TabIndex = 4;
             // 
             // button2
             // 
@@ -80,6 +80,7 @@
             this.button3.Text = "Düzenle";
             this.button3.UseCompatibleTextRendering = true;
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -91,6 +92,7 @@
             this.button4.Text = "Sil";
             this.button4.UseCompatibleTextRendering = true;
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -127,7 +129,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.listBox2);
+            this.groupBox1.Controls.Add(this.lstBoxCari);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.button6);
@@ -140,7 +142,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.listBox1);
+            this.groupBox2.Controls.Add(this.lstBoxKategori);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.button3);
@@ -168,8 +170,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox lstBoxKategori;
+        private System.Windows.Forms.ListBox lstBoxCari;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;

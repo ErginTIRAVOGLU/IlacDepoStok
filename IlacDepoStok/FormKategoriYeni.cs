@@ -21,7 +21,18 @@ namespace IlacDepoStok
         private void button1_Click(object sender, EventArgs e)
         {
             KategoriModel kategoriModel = new KategoriModel();
-            kategoriModel.Kategori_Adi = textBox1.Text;
+            if (lblKategoriID.Text != "")
+            {
+                kategoriModel.cari_kategori_adi = txtCariKategoriAdi.Text;
+                kategoriModel.cari_kategori_id = int.Parse(lblKategoriID.Text);
+                SqliteDataAccess.UpdateCariKategori(kategoriModel);
+            }
+            else
+            {
+                kategoriModel.cari_kategori_adi = txtCariKategoriAdi.Text;
+                SqliteDataAccess.SaveCariKategori(kategoriModel);
+            }
+            this.Close();
         }
     }
 }
