@@ -172,6 +172,14 @@ namespace IlacDepoStok.Data
             }
         }
 
+        public static void cariKategoriSil(int kategoriId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("delete from cari_kategori WHERE cari_kategori_id=@cari_kategori_id", new { cari_kategori_id = kategoriId });
+            }
+        }
+        
         private string DateTimeSQLite(DateTime datetime)
         {
             string dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";

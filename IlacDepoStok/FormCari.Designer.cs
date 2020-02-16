@@ -126,6 +126,7 @@
             this.button7.Text = "Ekle";
             this.button7.UseCompatibleTextRendering = true;
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // groupBox1
             // 
