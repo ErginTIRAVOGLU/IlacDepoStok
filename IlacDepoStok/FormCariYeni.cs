@@ -25,8 +25,9 @@ namespace IlacDepoStok
             CariModel cariModel = new CariModel();
             if (lblCariID.Text != "")
             {
+                cariModel.cari_id = int.Parse(lblCariID.Text);
                 cariModel.cari_ad_soyad = txtCariAdi.Text;
-                cariModel.cari_kategori_id = Kategori_Id;
+                cariModel.cari_kategori_id = ((KategoriModel)(cmbKategoriAdi.SelectedItem)).cari_kategori_id;
                 SqliteDataAccess.UpdateCari(cariModel);
             }
             else
@@ -41,6 +42,13 @@ namespace IlacDepoStok
         private void FormCariYeni_Load(object sender, EventArgs e)
         {
             lblKategoriAdi.Text = Kategori_Adi;
+
+            cmbKategoriAdi.DisplayMember = "cari_kategori_adi";
+            cmbKategoriAdi.ValueMember = "cari_kategori_id";
+            cmbKategoriAdi.DataSource = SqliteDataAccess.LoadCariKategoriler();
+            var kategorisi = SqliteDataAccess.GetCariKategoribyId(Kategori_Id);
+            cmbKategoriAdi.SelectedIndex = cmbKategoriAdi.FindStringExact(Kategori_Adi);
+           // cmbKategoriAdi.set
         }
     }
 }

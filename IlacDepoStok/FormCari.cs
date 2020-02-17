@@ -78,8 +78,15 @@ namespace IlacDepoStok
                 FormCariYeni formCariYeni = new FormCariYeni();
                 formCariYeni.Kategori_Adi = cariKategoriAdi;
                 formCariYeni.Kategori_Id = cariKategoriId;
+                ((Label)(formCariYeni.Controls["lblKategoriAdi"])).Visible = true;
                 formCariYeni.ShowDialog();
-                cariKategoriYukle();
+                if (lstBoxKategori.SelectedItem != null)
+                {
+                    int kategoriId = ((KategoriModel)(lstBoxKategori.SelectedItem)).cari_kategori_id;
+                    cariYukle(kategoriId);
+                }
+                //cariKategoriYukle();
+
             }
             else
             {
@@ -90,12 +97,33 @@ namespace IlacDepoStok
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            FormCariYeni formCariYeni = new FormCariYeni();
+            formCariYeni.Kategori_Id = ((CariModel)(lstBoxCari.SelectedItem)).cari_kategori_id;
+            formCariYeni.Kategori_Adi = ((KategoriModel)(lstBoxKategori.SelectedItem)).cari_kategori_adi;
+            
+            ((Label)(formCariYeni.Controls["lblCariID"])).Text = ((CariModel)(lstBoxCari.SelectedItem)).cari_id.ToString();
+            ((TextBox)(formCariYeni.Controls["txtCariAdi"])).Text = ((CariModel)(lstBoxCari.SelectedItem)).cari_ad_soyad;
+            ((Label)(formCariYeni.Controls["lblKategoriAdi"])).Text = ((CariModel)(lstBoxCari.SelectedItem)).cari_kategori_id.ToString();
+            ((ComboBox)(formCariYeni.Controls["cmbKategoriAdi"])).Visible = true;
+            formCariYeni.ShowDialog();
+            if (lstBoxKategori.SelectedItem != null)
+            {
+                int kategoriId = ((KategoriModel)(lstBoxKategori.SelectedItem)).cari_kategori_id;
+                cariYukle(kategoriId);
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            int cariId = ((CariModel)(lstBoxCari.SelectedItem)).cari_id;
 
+
+            SqliteDataAccess.cariSil(cariId);
+            if (lstBoxKategori.SelectedItem != null)
+            {
+                int kategoriId = ((KategoriModel)(lstBoxKategori.SelectedItem)).cari_kategori_id;
+                cariYukle(kategoriId);
+            }
         }
 
         private void lstBoxKategori_SelectedIndexChanged(object sender, EventArgs e)

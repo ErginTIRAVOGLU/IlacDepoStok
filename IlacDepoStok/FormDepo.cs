@@ -116,6 +116,8 @@ namespace IlacDepoStok
 
         private void btnSil_Click(object sender, EventArgs e)
         {
+            DialogResult dr = MessageBox.Show("Seçili Depo'yu Silmek İstediğinizden Emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if(dr.")
             int depoId=((DepoModel)(lstBoxDepolar.SelectedItem)).id;
             SqliteDataAccess.DeleteDepo(depoId);
             

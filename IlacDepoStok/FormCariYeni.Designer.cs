@@ -35,6 +35,7 @@
             this.lblKategoriAdi = new System.Windows.Forms.Label();
             this.lblCariID = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.cmbKategoriAdi = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button1
@@ -79,6 +80,7 @@
             this.lblKategoriAdi.Name = "lblKategoriAdi";
             this.lblKategoriAdi.Size = new System.Drawing.Size(0, 13);
             this.lblKategoriAdi.TabIndex = 7;
+            this.lblKategoriAdi.Visible = false;
             // 
             // lblCariID
             // 
@@ -97,11 +99,21 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Cari ID : ";
             // 
+            // cmbKategoriAdi
+            // 
+            this.cmbKategoriAdi.FormattingEnabled = true;
+            this.cmbKategoriAdi.Location = new System.Drawing.Point(88, 64);
+            this.cmbKategoriAdi.Name = "cmbKategoriAdi";
+            this.cmbKategoriAdi.Size = new System.Drawing.Size(121, 21);
+            this.cmbKategoriAdi.TabIndex = 10;
+            this.cmbKategoriAdi.Visible = false;
+            // 
             // FormCariYeni
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(212, 168);
+            this.ClientSize = new System.Drawing.Size(275, 168);
+            this.Controls.Add(this.cmbKategoriAdi);
             this.Controls.Add(this.lblCariID);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblKategoriAdi);
@@ -126,5 +138,6 @@
         private System.Windows.Forms.Label lblKategoriAdi;
         private System.Windows.Forms.Label lblCariID;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbKategoriAdi;
     }
 }
