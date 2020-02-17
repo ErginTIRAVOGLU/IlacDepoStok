@@ -29,12 +29,30 @@ namespace IlacDepoStok.Data
             }
         }
 
+        public static void UpdateCari(CariModel cariModel)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update cari SET cari_ad_soyad=@cari_ad_soyad,cari_kategori_id=@cari_kategori_id WHERE cari_id=@cari_id", cariModel);
+            }
+        }
+
+       
+
         public static List<DepoModel> LoadDepolar()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<DepoModel>("select * from depo order by adi", new DynamicParameters());
                 return output.ToList();
+            }
+        }
+
+        public static void SaveCari(CariModel cariModel)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into cari(cari_ad_soyad,cari_kategori_id) values (@cari_ad_soyad,@cari_kategori_id)", cariModel);
             }
         }
 
@@ -171,7 +189,14 @@ namespace IlacDepoStok.Data
                 return output.ToList();
             }
         }
-
+        public static List<CariModel> LoadCariler(int KategoriID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<CariModel>("select * from cari where cari_kategori_id=@cari_kategori_id order by cari_ad_soyad", new { cari_kategori_id = KategoriID });
+                return output.ToList();
+            }
+        }
         public static void cariKategoriSil(int kategoriId)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))

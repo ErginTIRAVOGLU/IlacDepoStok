@@ -49,6 +49,7 @@
             this.lstBoxKategori.Name = "lstBoxKategori";
             this.lstBoxKategori.Size = new System.Drawing.Size(181, 316);
             this.lstBoxKategori.TabIndex = 3;
+            this.lstBoxKategori.SelectedIndexChanged += new System.EventHandler(this.lstBoxKategori_SelectedIndexChanged);
             // 
             // lstBoxCari
             // 
@@ -104,6 +105,7 @@
             this.button5.Text = "Sil";
             this.button5.UseCompatibleTextRendering = true;
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -115,6 +117,7 @@
             this.button6.Text = "Düzenle";
             this.button6.UseCompatibleTextRendering = true;
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
