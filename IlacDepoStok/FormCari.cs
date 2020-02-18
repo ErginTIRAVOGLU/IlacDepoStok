@@ -57,12 +57,17 @@ namespace IlacDepoStok
         }
 
         private void button4_Click(object sender, EventArgs e)
-        { 
-            int kategorId=((KategoriModel)(lstBoxKategori.SelectedItem)).cari_kategori_id;
+        {
+            DialogResult dialog = new DialogResult();
+            dialog = MessageBox.Show("Seçili Kategori'yi Silmek İstediğinizden Emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialog == DialogResult.Yes)
+            {
+                int kategorId = ((KategoriModel)(lstBoxKategori.SelectedItem)).cari_kategori_id;
 
 
-            SqliteDataAccess.cariKategoriSil(kategorId);
-            cariKategoriYukle();
+                SqliteDataAccess.cariKategoriSil(kategorId);
+                cariKategoriYukle();
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -115,14 +120,19 @@ namespace IlacDepoStok
 
         private void button5_Click(object sender, EventArgs e)
         {
-            int cariId = ((CariModel)(lstBoxCari.SelectedItem)).cari_id;
-
-
-            SqliteDataAccess.cariSil(cariId);
-            if (lstBoxKategori.SelectedItem != null)
+            DialogResult dialog = new DialogResult();
+            dialog = MessageBox.Show("Seçili Cari'yi Silmek İstediğinizden Emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialog == DialogResult.Yes)
             {
-                int kategoriId = ((KategoriModel)(lstBoxKategori.SelectedItem)).cari_kategori_id;
-                cariYukle(kategoriId);
+                int cariId = ((CariModel)(lstBoxCari.SelectedItem)).cari_id;
+
+
+                SqliteDataAccess.cariSil(cariId);
+                if (lstBoxKategori.SelectedItem != null)
+                {
+                    int kategoriId = ((KategoriModel)(lstBoxKategori.SelectedItem)).cari_kategori_id;
+                    cariYukle(kategoriId);
+                }
             }
         }
 
