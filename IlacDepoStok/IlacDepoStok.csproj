@@ -112,6 +112,12 @@
     <Compile Include="FormCari.Designer.cs">
       <DependentUpon>FormCari.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCariHareket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCariHareket.Designer.cs">
+      <DependentUpon>FormCariHareket.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormKategoriYeni.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormCari.resx">
       <DependentUpon>FormCari.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCariHareket.resx">
+      <DependentUpon>FormCariHareket.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormKategoriYeni.resx">
       <DependentUpon>FormKategoriYeni.cs</DependentUpon>

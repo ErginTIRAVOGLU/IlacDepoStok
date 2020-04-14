@@ -44,6 +44,8 @@
             this.btnStokCikis = new System.Windows.Forms.Button();
             this.lblKalanStogu = new System.Windows.Forms.Label();
             this.lblKalanStok = new System.Windows.Forms.Label();
+            this.lblCari = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dGVHareket)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +53,7 @@
             // lblBarcode
             // 
             this.lblBarcode.AutoSize = true;
-            this.lblBarcode.Location = new System.Drawing.Point(34, 24);
+            this.lblBarcode.Location = new System.Drawing.Point(34, 43);
             this.lblBarcode.Name = "lblBarcode";
             this.lblBarcode.Size = new System.Drawing.Size(58, 13);
             this.lblBarcode.TabIndex = 0;
@@ -61,7 +63,7 @@
             // 
             this.lblIlacAdi.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
             this.lblIlacAdi.AutoSize = true;
-            this.lblIlacAdi.Location = new System.Drawing.Point(35, 58);
+            this.lblIlacAdi.Location = new System.Drawing.Point(35, 77);
             this.lblIlacAdi.Name = "lblIlacAdi";
             this.lblIlacAdi.Size = new System.Drawing.Size(57, 13);
             this.lblIlacAdi.TabIndex = 1;
@@ -69,7 +71,7 @@
             // 
             // txtBarkod
             // 
-            this.txtBarkod.Location = new System.Drawing.Point(98, 21);
+            this.txtBarkod.Location = new System.Drawing.Point(98, 40);
             this.txtBarkod.Name = "txtBarkod";
             this.txtBarkod.Size = new System.Drawing.Size(156, 20);
             this.txtBarkod.TabIndex = 2;
@@ -78,7 +80,7 @@
             // 
             // txtIlacAdi
             // 
-            this.txtIlacAdi.Location = new System.Drawing.Point(98, 55);
+            this.txtIlacAdi.Location = new System.Drawing.Point(98, 74);
             this.txtIlacAdi.Name = "txtIlacAdi";
             this.txtIlacAdi.Size = new System.Drawing.Size(156, 20);
             this.txtIlacAdi.TabIndex = 3;
@@ -115,6 +117,9 @@
             // 
             this.dGVHareket.AllowUserToAddRows = false;
             this.dGVHareket.AllowUserToDeleteRows = false;
+            this.dGVHareket.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dGVHareket.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGVHareket.Location = new System.Drawing.Point(6, 19);
             this.dGVHareket.Name = "dGVHareket";
@@ -124,6 +129,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.dGVHareket);
             this.groupBox1.Location = new System.Drawing.Point(22, 219);
             this.groupBox1.Name = "groupBox1";
@@ -135,7 +143,7 @@
             // lblIacNot
             // 
             this.lblIacNot.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblIacNot.Location = new System.Drawing.Point(98, 88);
+            this.lblIacNot.Location = new System.Drawing.Point(98, 107);
             this.lblIacNot.Name = "lblIacNot";
             this.lblIacNot.Size = new System.Drawing.Size(231, 73);
             this.lblIacNot.TabIndex = 7;
@@ -143,7 +151,7 @@
             // lblIacNotu
             // 
             this.lblIacNotu.AutoSize = true;
-            this.lblIacNotu.Location = new System.Drawing.Point(22, 88);
+            this.lblIacNotu.Location = new System.Drawing.Point(22, 107);
             this.lblIacNotu.Name = "lblIacNotu";
             this.lblIacNotu.Size = new System.Drawing.Size(70, 13);
             this.lblIacNotu.TabIndex = 8;
@@ -156,7 +164,7 @@
             this.btnIlacDuzenle.Name = "btnIlacDuzenle";
             this.btnIlacDuzenle.Size = new System.Drawing.Size(75, 53);
             this.btnIlacDuzenle.TabIndex = 9;
-            this.btnIlacDuzenle.Text = "&Düzenle";
+            this.btnIlacDuzenle.Text = "İlaç &Düzenle";
             this.btnIlacDuzenle.UseCompatibleTextRendering = true;
             this.btnIlacDuzenle.UseVisualStyleBackColor = true;
             this.btnIlacDuzenle.Click += new System.EventHandler(this.btnIlacDuzenle_Click);
@@ -180,7 +188,7 @@
             // lblKalanStogu
             // 
             this.lblKalanStogu.AutoSize = true;
-            this.lblKalanStogu.Location = new System.Drawing.Point(12, 172);
+            this.lblKalanStogu.Location = new System.Drawing.Point(12, 191);
             this.lblKalanStogu.Name = "lblKalanStogu";
             this.lblKalanStogu.Size = new System.Drawing.Size(80, 13);
             this.lblKalanStogu.TabIndex = 13;
@@ -189,16 +197,35 @@
             // lblKalanStok
             // 
             this.lblKalanStok.AutoSize = true;
-            this.lblKalanStok.Location = new System.Drawing.Point(99, 172);
+            this.lblKalanStok.Location = new System.Drawing.Point(99, 191);
             this.lblKalanStok.Name = "lblKalanStok";
             this.lblKalanStok.Size = new System.Drawing.Size(0, 13);
             this.lblKalanStok.TabIndex = 14;
+            // 
+            // lblCari
+            // 
+            this.lblCari.AutoSize = true;
+            this.lblCari.Location = new System.Drawing.Point(99, 24);
+            this.lblCari.Name = "lblCari";
+            this.lblCari.Size = new System.Drawing.Size(0, 13);
+            this.lblCari.TabIndex = 16;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(54, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "CARİ :";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 517);
+            this.Controls.Add(this.lblCari);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblKalanStok);
             this.Controls.Add(this.lblKalanStogu);
             this.Controls.Add(this.btnStokCikis);
@@ -238,6 +265,8 @@
         private System.Windows.Forms.Label lblKalanStogu;
         private System.Windows.Forms.Label lblKalanStok;
         private System.Windows.Forms.ImageList ımageList1;
+        private System.Windows.Forms.Label lblCari;
+        private System.Windows.Forms.Label label2;
     }
 }
 

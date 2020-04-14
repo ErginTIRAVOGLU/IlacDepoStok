@@ -36,11 +36,17 @@
             this.lblCariID = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbKategoriAdi = new System.Windows.Forms.ComboBox();
+            this.txtTelefon = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtAdres = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtNot = new System.Windows.Forms.TextBox();
+            this.lblNot = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(88, 113);
+            this.button1.Location = new System.Drawing.Point(232, 247);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -108,11 +114,67 @@
             this.cmbKategoriAdi.TabIndex = 10;
             this.cmbKategoriAdi.Visible = false;
             // 
+            // txtTelefon
+            // 
+            this.txtTelefon.Location = new System.Drawing.Point(88, 91);
+            this.txtTelefon.Name = "txtTelefon";
+            this.txtTelefon.Size = new System.Drawing.Size(138, 20);
+            this.txtTelefon.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(30, 94);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Telefon : ";
+            // 
+            // txtAdres
+            // 
+            this.txtAdres.Location = new System.Drawing.Point(88, 117);
+            this.txtAdres.Multiline = true;
+            this.txtAdres.Name = "txtAdres";
+            this.txtAdres.Size = new System.Drawing.Size(138, 75);
+            this.txtAdres.TabIndex = 14;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(39, 120);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Adres : ";
+            // 
+            // txtNot
+            // 
+            this.txtNot.Location = new System.Drawing.Point(277, 43);
+            this.txtNot.Multiline = true;
+            this.txtNot.Name = "txtNot";
+            this.txtNot.Size = new System.Drawing.Size(242, 149);
+            this.txtNot.TabIndex = 15;
+            // 
+            // lblNot
+            // 
+            this.lblNot.AutoSize = true;
+            this.lblNot.Location = new System.Drawing.Point(274, 24);
+            this.lblNot.Name = "lblNot";
+            this.lblNot.Size = new System.Drawing.Size(33, 13);
+            this.lblNot.TabIndex = 16;
+            this.lblNot.Text = "Not : ";
+            // 
             // FormCariYeni
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 168);
+            this.ClientSize = new System.Drawing.Size(557, 305);
+            this.Controls.Add(this.lblNot);
+            this.Controls.Add(this.txtNot);
+            this.Controls.Add(this.txtAdres);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtTelefon);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbKategoriAdi);
             this.Controls.Add(this.lblCariID);
             this.Controls.Add(this.label4);
@@ -139,5 +201,11 @@
         private System.Windows.Forms.Label lblCariID;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbKategoriAdi;
+        private System.Windows.Forms.TextBox txtTelefon;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtAdres;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtNot;
+        private System.Windows.Forms.Label lblNot;
     }
 }

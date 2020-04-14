@@ -85,7 +85,7 @@ namespace IlacDepoStok
 
         private void MDIParent1_Load(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();
+            FormCari form1 = new FormCari();
             form1.MdiParent = this;
             
             form1.Show();

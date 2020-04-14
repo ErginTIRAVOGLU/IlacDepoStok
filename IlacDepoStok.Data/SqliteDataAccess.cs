@@ -28,16 +28,31 @@ namespace IlacDepoStok.Data
                 cnn.Execute("insert into depo(adi) values (@adi)", depo);
             }
         }
+        public static Cari_Kategori_Model getCariWithKategoribyCariId(int? cariId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<Cari_Kategori_Model>("select * from cari inner join cari_kategori on cari_kategori.cari_kategori_id==cari.cari_kategori_id where cari_id = @cari_id", new { cari_id = cariId });
+                return output.FirstOrDefault();
+            }
+        }
+        public static CariModel getCaribyCariId(int? cariId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<CariModel>("select * from cari where cari_id = @cari_id", new { cari_id = cariId });
+                return output.FirstOrDefault();
+            }
+        }
 
         public static void UpdateCari(CariModel cariModel)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update cari SET cari_ad_soyad=@cari_ad_soyad,cari_kategori_id=@cari_kategori_id WHERE cari_id=@cari_id", cariModel);
+                cnn.Execute("update cari SET cari_ad_soyad=@cari_ad_soyad,cari_kategori_id=@cari_kategori_id,cari_telefon=@cari_telefon,cari_adres=@cari_adres,cari_not=@cari_not WHERE cari_id=@cari_id", cariModel);
             }
         }
-
-       
+               
 
         public static List<DepoModel> LoadDepolar()
         {
@@ -47,7 +62,7 @@ namespace IlacDepoStok.Data
                 return output.ToList();
             }
         }
-
+        
         public static KategoriModel GetCariKategoribyId(int cariKategoriId)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -57,11 +72,20 @@ namespace IlacDepoStok.Data
             }
         }
 
+        public static List<HareketModel> findHareketbyCariId(int? cariId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<HareketModel>("select hareket.fiyat,hareket.tutar,hareket.id, date(hareket.tarih) as tarih, hareket.yon, hareket.adet, hareket.ilac_id, hareket.depo_id,ilac.adi as ilac_adi, depo.adi AS depo_adi from hareket inner join ilac on ilac.id=hareket.ilac_id inner join depo on depo.id=hareket.depo_id inner join cari on cari.cari_id=hareket.cari_id where cari.cari_id=@cari_id order by date(tarih) desc, hareket.id desc", new { cari_id = cariId });
+                return output.ToList();
+            }
+        }
+
         public static void SaveCari(CariModel cariModel)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into cari(cari_ad_soyad,cari_kategori_id) values (@cari_ad_soyad,@cari_kategori_id)", cariModel);
+                cnn.Execute("insert into cari(cari_ad_soyad,cari_kategori_id,cari_telefon,cari_adres,cari_not) values (@cari_ad_soyad,@cari_kategori_id,@cari_telefon,@cari_adres,@cari_not)", cariModel);
             }
         }
 
@@ -69,7 +93,7 @@ namespace IlacDepoStok.Data
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into hareket(yon, adet, ilac_id, depo_id, tarih) values (@yon, @adet, @ilac_id, @depo_id, @tarih)", hModel);
+                cnn.Execute("insert into hareket(yon, adet, ilac_id, depo_id, tarih, cari_id, tutar, fiyat) values (@yon, @adet, @ilac_id, @depo_id, @tarih, @cari_id, @tutar, @fiyat)", hModel);
             }
         }
         
@@ -149,7 +173,7 @@ namespace IlacDepoStok.Data
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<HareketModel>("select hareket.id, date(hareket.tarih) as tarih, hareket.yon, hareket.adet, hareket.ilac_id, hareket.depo_id,ilac.adi as ilac_adi, depo.adi AS depo_adi from hareket inner join ilac on ilac.id=hareket.ilac_id inner join depo on depo.id=hareket.depo_id where tarih=@tarih order by date(tarih) desc, hareket.id desc", new { tarih = htarih });
+                var output = cnn.Query<HareketModel>("select cari.cari_ad_soyad as cariadsoyad, hareket.id, date(hareket.tarih) as tarih, hareket.yon, hareket.adet, hareket.ilac_id, hareket.depo_id,ilac.adi as ilac_adi, depo.adi AS depo_adi from hareket inner join ilac on ilac.id=hareket.ilac_id inner join depo on depo.id=hareket.depo_id inner join cari on cari.cari_id=hareket.cari_id where tarih=@tarih order by date(tarih) desc, hareket.id desc", new { tarih = htarih });
                 return output.ToList();
             }
         }
@@ -160,6 +184,15 @@ namespace IlacDepoStok.Data
             {
                 var output = cnn.Query<StokModel>("select i1.*, IFNULL(i2.giren,0)as gireni, IFNULL(i3.cikan,0) as cikani, (IFNULL(i2.giren,0)-IFNULL(i3.cikan,0)) as Stok from ilac as i1 left join (select ilac.id, IFNULL(sum(adet),0) as giren from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'G' GROUP by ilac_id) as i2 on i2.id = i1.id left join (select ilac.id, IFNULL(sum(adet),0) as cikan from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'C' GROUP by ilac_id) as i3 on i3.id = i1.id where dusukStok >= kalan");
                 return output.ToList();
+            }
+        }
+
+        public static CariModel findCaribyCariId(int? cariId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.QueryFirstOrDefault<CariModel>("select * from cari where cari_id=@cari_id", new { cari_id = cariId });
+                return output;
             }
         }
 
@@ -214,6 +247,23 @@ namespace IlacDepoStok.Data
                 return output.ToList();
             }
         }
+
+        public static List<CariModel> LoadCarilerbyCariAdi(string cariAdi)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<CariModel>("select * from cari where cari_ad_soyad like @cari_ad_soyad order by cari_ad_soyad", new { cari_ad_soyad = "%" + cariAdi + "%"});
+                return output.ToList();
+            }
+        }
+        public static List<CariModel> LoadCarilerKategoriilebyCariAdi(int kategoriId, string cariAdi)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<CariModel>("select * from cari where  cari_kategori_id=@cari_kategori_id and cari_ad_soyad like @cari_ad_soyad order by cari_ad_soyad", new { cari_kategori_id = kategoriId , cari_ad_soyad = "%" + cariAdi + "%" });
+                return output.ToList();
+            }
+        }
         public static void cariKategoriSil(int kategoriId)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -221,7 +271,16 @@ namespace IlacDepoStok.Data
                 cnn.Execute("delete from cari_kategori WHERE cari_kategori_id=@cari_kategori_id", new { cari_kategori_id = kategoriId });
             }
         }
-        
+
+        public static List<KategoriModel> LoadCariKategorilerbyKategoriAdi(string kategoriAdi)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<KategoriModel>("select * from cari_kategori where cari_kategori_adi like @cari_kategori_adi order by cari_kategori_adi", new { cari_kategori_adi = "%" + kategoriAdi + "%" });
+                return output.ToList();
+            }
+        }
+
         private string DateTimeSQLite(DateTime datetime)
         {
             string dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";

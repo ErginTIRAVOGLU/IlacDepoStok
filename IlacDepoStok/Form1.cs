@@ -14,6 +14,7 @@ namespace IlacDepoStok
 {
     public partial class Form1 : Form
     {
+        public int? CariId { get; set; }
         public Form1()
         {
             InitializeComponent();
@@ -22,7 +23,10 @@ namespace IlacDepoStok
         
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+           if(CariId!=null)
+            {
+                lblCari.Text = SqliteDataAccess.getCaribyCariId(CariId).cari_ad_soyad;
+            }
 
             loadIlacList();
             
@@ -100,11 +104,10 @@ namespace IlacDepoStok
         private void loadIlacList()
         {
             List<HareketModel> hModel = new List<HareketModel>();
-            //dGVHareket.DataSource = hModel;
+            
             dGVHareket.DataSource = null;
             dGVHareket.Columns.Clear();
-            //List<IlacModel> ilaclar = new List<IlacModel>();
-            //ilaclar = SqliteDataAccess.LoadIlaclar();
+         
 
             DataGridViewTextBoxColumn textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "id";
@@ -119,13 +122,21 @@ namespace IlacDepoStok
             dGVHareket.Columns.Add(textBoxColumn);
 
             textBoxColumn = new DataGridViewTextBoxColumn();
+            textBoxColumn.DataPropertyName = "cariadsoyad";
+            textBoxColumn.HeaderText = "Cari";
+            textBoxColumn.Width = 150;
+            dGVHareket.Columns.Add(textBoxColumn);
+
+            textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "adet";
             textBoxColumn.HeaderText = "Adet";
+            textBoxColumn.Width = 50;
             dGVHareket.Columns.Add(textBoxColumn);
 
             textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "yon";
             textBoxColumn.HeaderText = "Yön";
+            textBoxColumn.Width = 50;
             dGVHareket.Columns.Add(textBoxColumn);
 
 
@@ -137,10 +148,11 @@ namespace IlacDepoStok
             textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "tarih";
             textBoxColumn.HeaderText = "Tarih";
+            textBoxColumn.Width = 75;
             textBoxColumn.DefaultCellStyle.Format = "yyyy-MM-dd";
 
             dGVHareket.Columns.Add(textBoxColumn);
-hModel = SqliteDataAccess.findHareketbyTarih(DateTime.Now.ToString("yyyy-MM-dd"));
+            hModel = SqliteDataAccess.findHareketbyTarih(DateTime.Now.ToString("yyyy-MM-dd"));
            
 
             dGVHareket.DataSource = hModel;
@@ -182,6 +194,10 @@ hModel = SqliteDataAccess.findHareketbyTarih(DateTime.Now.ToString("yyyy-MM-dd")
         {
             FormStokGiris frmStokGiris = new FormStokGiris();
             Label ilacAdi = (Label)frmStokGiris.Controls["lblIlacAd"];
+            frmStokGiris.CariId = CariId;
+            
+            var cari = SqliteDataAccess.findCaribyCariId(CariId);
+            frmStokGiris.CariAdi = cari.cari_ad_soyad;
 
             IlacModel ilac = SqliteDataAccess.findIlacbyBarkod(txtBarkod.Text);
 
@@ -197,6 +213,10 @@ hModel = SqliteDataAccess.findHareketbyTarih(DateTime.Now.ToString("yyyy-MM-dd")
         {
             FormStokCikis frmStokCikis = new FormStokCikis();
             Label ilacAdi = (Label)frmStokCikis.Controls["lblIlacAd"];
+            frmStokCikis.CariId = CariId;
+
+            var cari = SqliteDataAccess.findCaribyCariId(CariId);
+            frmStokCikis.CariAdi = cari.cari_ad_soyad;
 
             IlacModel ilac = SqliteDataAccess.findIlacbyBarkod(txtBarkod.Text);
 

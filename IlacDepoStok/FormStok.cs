@@ -1,4 +1,5 @@
 ﻿using IlacDepoStok.Data;
+using Microsoft.Office.Interop.Excel;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
@@ -24,11 +25,10 @@ namespace IlacDepoStok
         private void btnStokListele_Click(object sender, EventArgs e)
         {
             List<StokModel> sModel = new List<StokModel>();
-            //dGVStok.DataSource = sModel;
+             
             dGVStok.DataSource = null;
             dGVStok.Columns.Clear();
-            //List<IlacModel> ilaclar = new List<IlacModel>();
-            //ilaclar = SqliteDataAccess.LoadIlaclar();
+          
 
             DataGridViewTextBoxColumn textBoxColumn = new DataGridViewTextBoxColumn();
             textBoxColumn.DataPropertyName = "id";
@@ -92,37 +92,64 @@ namespace IlacDepoStok
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // creating Excel Application  
-            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-            // creating new WorkBook within Excel application  
-            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
-            // creating new Excelsheet in workbook  
-            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-            // see the excel sheet behind the program  
-            app.Visible = true;
-            // get the reference of first sheet. By default its name is Sheet1.  
-            // store its reference to worksheet  
-            worksheet = workbook.Sheets["Sheet1"];
-            worksheet = workbook.ActiveSheet;
-            // changing the name of active sheet  
-            worksheet.Name = "Exported from gridview";
-            // storing header part in Excel  
-            for (int i = 1; i < dGVStok.Columns.Count + 1; i++)
+            try
             {
-                worksheet.Cells[1, i] = dGVStok.Columns[i - 1].HeaderText;
-            }
-            // storing Each row and column value to excel sheet  
-            for (int i = 0; i < dGVStok.Rows.Count - 1; i++)
-            {
-                for (int j = 0; j < dGVStok.Columns.Count; j++)
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                app.Visible = true;
+                worksheet = workbook.Sheets["Sheet1"];
+                worksheet = workbook.ActiveSheet;
+                worksheet.Name = "Records";
+
+                try
                 {
-                    worksheet.Cells[i + 2, j + 1] = dGVStok.Rows[i].Cells[j].Value.ToString();
+                    for (int i = 1; i < dGVStok.Columns.Count + 1; i++)
+                    {
+                        worksheet.Cells[1, i] = dGVStok.Columns[i - 1].HeaderText;
+                    }
+                    for (int i = 0; i < dGVStok.Rows.Count - 0; i++)
+                    {
+                        for (int j = 0; j < dGVStok.Columns.Count; j++)
+                        {
+                            if (dGVStok.Rows[i].Cells[j].Value != null)
+                            {
+                                worksheet.Cells[i + 2, j + 1] = dGVStok.Rows[i].Cells[j].Value.ToString();
+                            }
+                            else
+                            {
+                                worksheet.Cells[i + 2, j + 1] = "";
+                            }
+                        }
+                    }
+
+                    //Getting the location and file name of the excel to save from user. 
+                    SaveFileDialog saveDialog = new SaveFileDialog();
+                    saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                    saveDialog.FilterIndex = 2;
+
+                    if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        workbook.SaveAs(saveDialog.FileName);
+                        MessageBox.Show("Export Successful", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                finally
+                {
+                    app.Quit();
+                    workbook = null;
+                    worksheet = null;
                 }
             }
-            // save the application  
-            workbook.SaveAs("c:\\output.xls", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-            // Exit from the application  
-            app.Quit();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
 
         

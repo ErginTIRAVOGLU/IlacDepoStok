@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CariModel.cs" />
+    <Compile Include="Cari_Kategori_Model.cs" />
     <Compile Include="HareketModel.cs" />
     <Compile Include="DepoModel.cs" />
     <Compile Include="KategoriModel.cs" />

@@ -28,12 +28,18 @@ namespace IlacDepoStok
                 cariModel.cari_id = int.Parse(lblCariID.Text);
                 cariModel.cari_ad_soyad = txtCariAdi.Text;
                 cariModel.cari_kategori_id = ((KategoriModel)(cmbKategoriAdi.SelectedItem)).cari_kategori_id;
+                cariModel.cari_adres = txtAdres.Text;
+                cariModel.cari_not = txtNot.Text;
+                cariModel.cari_telefon = txtTelefon.Text;
                 SqliteDataAccess.UpdateCari(cariModel);
             }
             else
             {
                 cariModel.cari_ad_soyad= txtCariAdi.Text;
                 cariModel.cari_kategori_id = Kategori_Id;
+                cariModel.cari_adres = txtAdres.Text;
+                cariModel.cari_not = txtNot.Text;
+                cariModel.cari_telefon = txtTelefon.Text;
                 SqliteDataAccess.SaveCari(cariModel);
             }
             this.Close();
