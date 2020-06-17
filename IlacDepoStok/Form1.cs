@@ -149,7 +149,7 @@ namespace IlacDepoStok
             textBoxColumn.DataPropertyName = "tarih";
             textBoxColumn.HeaderText = "Tarih";
             textBoxColumn.Width = 75;
-            textBoxColumn.DefaultCellStyle.Format = "yyyy-MM-dd";
+            textBoxColumn.DefaultCellStyle.Format = "dd-MM-yyyy";
 
             dGVHareket.Columns.Add(textBoxColumn);
             hModel = SqliteDataAccess.findHareketbyTarih(DateTime.Now.ToString("yyyy-MM-dd"));

@@ -15,8 +15,8 @@ namespace IlacDepoStok.Data
 		public string yon { get; set; }
 		public int adet { get; set; }
 		public string depo_adi { get; set; }
-		public int fiyat { get; set; }
-		public int tutar { get; set; }
+		public decimal fiyat { get; set; }
+		public decimal tutar { get; set; }
 		public string tarih { get; set; }
 		
 

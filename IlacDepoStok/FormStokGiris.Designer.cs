@@ -51,7 +51,7 @@
             this.btnKaydet.Location = new System.Drawing.Point(39, 222);
             this.btnKaydet.Name = "btnKaydet";
             this.btnKaydet.Size = new System.Drawing.Size(75, 23);
-            this.btnKaydet.TabIndex = 0;
+            this.btnKaydet.TabIndex = 8;
             this.btnKaydet.Text = "Kaydet";
             this.btnKaydet.UseVisualStyleBackColor = true;
             this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
@@ -90,8 +90,7 @@
             this.dtpTarih.Location = new System.Drawing.Point(102, 188);
             this.dtpTarih.Name = "dtpTarih";
             this.dtpTarih.Size = new System.Drawing.Size(120, 20);
-            this.dtpTarih.TabIndex = 6;
-            this.dtpTarih.Visible = false;
+            this.dtpTarih.TabIndex = 7;
             // 
             // lblTarih
             // 
@@ -101,7 +100,6 @@
             this.lblTarih.Size = new System.Drawing.Size(81, 13);
             this.lblTarih.TabIndex = 7;
             this.lblTarih.Text = "GİRİŞ TARİHİ :";
-            this.lblTarih.Visible = false;
             // 
             // lblIlacAdi
             // 
@@ -135,7 +133,7 @@
             this.cmbDepo.Location = new System.Drawing.Point(102, 161);
             this.cmbDepo.Name = "cmbDepo";
             this.cmbDepo.Size = new System.Drawing.Size(120, 21);
-            this.cmbDepo.TabIndex = 11;
+            this.cmbDepo.TabIndex = 6;
             // 
             // label1
             // 
@@ -159,7 +157,7 @@
             this.txtTutar.Location = new System.Drawing.Point(102, 135);
             this.txtTutar.Name = "txtTutar";
             this.txtTutar.Size = new System.Drawing.Size(120, 20);
-            this.txtTutar.TabIndex = 18;
+            this.txtTutar.TabIndex = 5;
             this.txtTutar.Text = "0";
             // 
             // label3
@@ -176,7 +174,7 @@
             this.txtFiyat.Location = new System.Drawing.Point(102, 109);
             this.txtFiyat.Name = "txtFiyat";
             this.txtFiyat.Size = new System.Drawing.Size(120, 20);
-            this.txtFiyat.TabIndex = 17;
+            this.txtFiyat.TabIndex = 4;
             this.txtFiyat.Text = "0";
             this.txtFiyat.TextChanged += new System.EventHandler(this.txtFiyat_TextChanged);
             // 

@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -44,48 +46,29 @@ namespace IlacDepoStok
             hModel.depo_id = ((DepoModel)(cmbDepo.SelectedItem)).id;
             hModel.cari_id = int.Parse(CariId.ToString());
 
-            int fiyat = 0;
-            if (txtFiyat.Text.Contains(','))
-            {
-                fiyat = int.Parse(txtFiyat.Text.Replace(",", ""));
-            }
-            else
-            {
-                fiyat = int.Parse(txtFiyat.Text) * 100;
-            }
-            hModel.fiyat = fiyat;
+            string fiyat = txtFiyat.Text.Replace(".", "").Replace("₺", "").Replace(",", "").TrimStart('0');
 
-            int tutar = 0;
-            if (txtTutar.Text.Contains(','))
-            {
-                //MessageBox.Show(txtTutar.Text.IndexOf(',') + " . " + txtTutar.TextLength);
-                if (txtTutar.Text.IndexOf(',') == txtTutar.TextLength - 2)
-                {
-                    txtTutar.Text = txtTutar.Text + "0";
-                }
-                else if (txtTutar.TextLength - txtTutar.Text.IndexOf(',') > 3)
-                {
-                    txtTutar.Text = txtTutar.Text.Substring(0, txtTutar.Text.IndexOf(',') + 3);
-                }
+            hModel.fiyat = int.Parse(fiyat);
 
-                tutar = int.Parse(txtTutar.Text.Replace(",", ""));
-            }
-            else
-            {
-                tutar = int.Parse(txtTutar.Text) * 100;
-            }
-            hModel.tutar = tutar;
+            string tutar = txtTutar.Text.Replace(".", "").Replace("₺", "").Replace(",", "").TrimStart('0');
+
+            hModel.tutar = int.Parse(tutar);
 
 
-            hModel.tarih = DateTime.Today.ToString("yyyy-MM-dd");// dtpTarih.Value.ToString("yyyy-MM-dd");
+            hModel.tarih = dtpTarih.Value.ToString("yyyy-MM-dd");//DateTime.Today.ToString("yyyy-MM-dd");// dtpTarih.Value.ToString("yyyy-MM-dd");
             SqliteDataAccess.SaveHareket(hModel);
             this.Close();
         }
         private void txtAdet_TextChanged(object sender, EventArgs e)
         {
+            string value = txtFiyat.Text.Replace(".", "")
+              .Replace("₺", "").Replace(",", "").TrimStart('0');
+            decimal deger;
+
             try
             {
-                txtTutar.Text = (decimal.Parse(txtAdet.Text) * decimal.Parse(txtFiyat.Text)).ToString();
+                deger = (decimal.Parse(txtAdet.Text) * decimal.Parse(value));
+                txtTutar.Text = string.Format(CultureInfo.CreateSpecificCulture("tr-TR"), "{0:C2}", deger / 100);
             }
             catch
             {
@@ -97,9 +80,38 @@ namespace IlacDepoStok
 
         private void txtFiyat_TextChanged(object sender, EventArgs e)
         {
+            //Remove previous formatting, or the decimal check will fail including leading zeros
+            string value = txtFiyat.Text.Replace(".", "")
+                .Replace("₺", "").Replace(",", "").TrimStart('0');
+            decimal ul;
+            decimal deger;
+            //Check we are indeed handling a number
+            if (decimal.TryParse(value, out ul))
+            {
+                ul /= 100;
+                //Unsub the event so we don't enter a loop
+                txtFiyat.TextChanged -= txtFiyat_TextChanged;
+                //Format the text as currency
+
+
+
+                txtFiyat.Text = string.Format(CultureInfo.CreateSpecificCulture("tr-TR"), "{0:C2}", ul);
+                //txtFiyat.Text = string.Format("{0:C2}", ul);
+                txtFiyat.TextChanged += txtFiyat_TextChanged;
+                txtFiyat.Select(txtFiyat.Text.Length, 0);
+            }
+            bool goodToGo = TextisValid(txtFiyat.Text);
+            btnKaydet.Enabled = goodToGo;
+            if (!goodToGo)
+            {
+                txtFiyat.Text = "0.00₺";
+                txtFiyat.Select(txtFiyat.Text.Length, 0);
+            }
+
             try
             {
-                txtTutar.Text = (decimal.Parse(txtAdet.Text) * decimal.Parse(txtFiyat.Text)).ToString();
+                deger = (decimal.Parse(txtAdet.Text) * decimal.Parse(value));
+                txtTutar.Text = string.Format(CultureInfo.CreateSpecificCulture("tr-TR"), "{0:C2}", deger / 100);
             }
             catch
             {
@@ -107,6 +119,17 @@ namespace IlacDepoStok
 
             }
 
+
+        }
+
+
+
+
+
+        private bool TextisValid(string text)
+        {
+            Regex money = new Regex(@"^₺(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$");
+            return money.IsMatch(text);
         }
 
     }

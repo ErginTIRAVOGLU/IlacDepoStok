@@ -46,6 +46,8 @@
             this.lblKalanStok = new System.Windows.Forms.Label();
             this.lblCari = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblFiyat = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dGVHareket)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -124,7 +126,7 @@
             this.dGVHareket.Location = new System.Drawing.Point(6, 19);
             this.dGVHareket.Name = "dGVHareket";
             this.dGVHareket.ReadOnly = true;
-            this.dGVHareket.Size = new System.Drawing.Size(734, 261);
+            this.dGVHareket.Size = new System.Drawing.Size(734, 239);
             this.dGVHareket.TabIndex = 5;
             // 
             // groupBox1
@@ -133,9 +135,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.dGVHareket);
-            this.groupBox1.Location = new System.Drawing.Point(22, 219);
+            this.groupBox1.Location = new System.Drawing.Point(22, 241);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(746, 286);
+            this.groupBox1.Size = new System.Drawing.Size(746, 264);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Stok Hareket";
@@ -219,11 +221,30 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "CARİ :";
             // 
+            // lblFiyat
+            // 
+            this.lblFiyat.AutoSize = true;
+            this.lblFiyat.Location = new System.Drawing.Point(99, 215);
+            this.lblFiyat.Name = "lblFiyat";
+            this.lblFiyat.Size = new System.Drawing.Size(0, 13);
+            this.lblFiyat.TabIndex = 18;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(46, 215);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "FİYATI :";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 517);
+            this.Controls.Add(this.lblFiyat);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.lblCari);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblKalanStok);
@@ -267,6 +288,8 @@
         private System.Windows.Forms.ImageList ımageList1;
         private System.Windows.Forms.Label lblCari;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblFiyat;
+        private System.Windows.Forms.Label label3;
     }
 }
 

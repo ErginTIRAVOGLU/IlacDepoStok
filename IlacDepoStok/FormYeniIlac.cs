@@ -35,6 +35,9 @@ namespace IlacDepoStok
                 ilacModel.barcode = txtBarkod.Text;
                 ilacModel.adi = txtIlacAdi.Text;
                 ilacModel.notu = txtIlacNotu.Text;
+
+                string fiyat = txtFiyat.Text.Replace(".", "").Replace("₺", "").Replace(",", "").TrimStart('0');
+                ilacModel.fiyat = int.Parse(fiyat);
                 int.TryParse(txtDusukStok.Text, out dusukStok);
                 ilacModel.dusukStok = dusukStok;
                 SqliteDataAccess.SaveIlac(ilacModel);
@@ -45,6 +48,9 @@ namespace IlacDepoStok
                 int dusukStok = 0;
                 ilac.adi = txtIlacAdi.Text;
                 ilac.barcode = txtBarkod.Text;
+
+                string fiyat = txtFiyat.Text.Replace(".", "").Replace("₺", "").Replace(",", "").TrimStart('0');
+                ilac.fiyat = int.Parse(fiyat);
                 int.TryParse(txtDusukStok.Text, out dusukStok);
                 ilac.dusukStok = dusukStok;
                 ilac.notu = txtIlacNotu.Text;

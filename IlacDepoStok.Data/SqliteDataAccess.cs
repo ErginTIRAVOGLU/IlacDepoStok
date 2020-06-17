@@ -76,7 +76,7 @@ namespace IlacDepoStok.Data
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<HareketModel>("select hareket.fiyat,hareket.tutar,hareket.id, date(hareket.tarih) as tarih, hareket.yon, hareket.adet, hareket.ilac_id, hareket.depo_id,ilac.adi as ilac_adi, depo.adi AS depo_adi from hareket inner join ilac on ilac.id=hareket.ilac_id inner join depo on depo.id=hareket.depo_id inner join cari on cari.cari_id=hareket.cari_id where cari.cari_id=@cari_id order by date(tarih) desc, hareket.id desc", new { cari_id = cariId });
+                var output = cnn.Query<HareketModel>("select   CAST(hareket.fiyat AS FLOAT)/100 as fiyat, cast(hareket.tutar as float)/100 as tutar, hareket.id, date(hareket.tarih) as tarih, hareket.yon, hareket.adet, hareket.ilac_id, hareket.depo_id,ilac.adi as ilac_adi, depo.adi AS depo_adi from hareket inner join ilac on ilac.id=hareket.ilac_id inner join depo on depo.id=hareket.depo_id inner join cari on cari.cari_id=hareket.cari_id where cari.cari_id=@cari_id order by date(tarih) desc, hareket.id desc", new { cari_id = cariId });
                 return output.ToList();
             }
         }

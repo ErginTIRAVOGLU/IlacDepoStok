@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -35,6 +36,10 @@ namespace IlacDepoStok
         private void loadCariHareket()
         {
             List<HareketModel> hModel = new List<HareketModel>();
+            
+            var culture = CultureInfo.CreateSpecificCulture("tr-TR");
+            culture.NumberFormat.NumberGroupSeparator = " ";
+            dgvCariHareket.DefaultCellStyle.FormatProvider = culture;
 
             dgvCariHareket.DataSource = null;
             dgvCariHareket.Columns.Clear();
@@ -100,13 +105,31 @@ namespace IlacDepoStok
             textBoxColumn.DataPropertyName = "tarih";
             textBoxColumn.HeaderText = "Tarih";
             textBoxColumn.Width = 75;
-            textBoxColumn.DefaultCellStyle.Format = "yyyy-MM-dd";
-
+            textBoxColumn.DefaultCellStyle.Format = "d";            
+            dgvCariHareket.Columns.Add(textBoxColumn);
+            
+            textBoxColumn = new DataGridViewTextBoxColumn();
+            //CultureInfo ci = CultureInfo.CreateSpecificCulture("tr-TR");
+            textBoxColumn.DataPropertyName = "fiyat";
+            textBoxColumn.HeaderText = "Fiyat";
+            //textBoxColumn.DefaultCellStyle.FormatProvider = ci;
+            textBoxColumn.Width = 75;
+            //textBoxColumn.ValueType = Type.GetType("System.Decimal");
+            
+           textBoxColumn.DefaultCellStyle.Format = "C";
+            
             dgvCariHareket.Columns.Add(textBoxColumn);
 
+            textBoxColumn = new DataGridViewTextBoxColumn();
+            textBoxColumn.DataPropertyName = "tutar";
+            textBoxColumn.HeaderText = "Tutar";
+            textBoxColumn.Width = 75;
+            textBoxColumn.DefaultCellStyle.Format = "C2";
+            dgvCariHareket.Columns.Add(textBoxColumn);
+            
             hModel = SqliteDataAccess.findHareketbyCariId(CariId);
            
-
+            
 
             dgvCariHareket.DataSource = hModel;
         }

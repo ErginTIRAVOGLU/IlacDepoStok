@@ -38,12 +38,14 @@
             this.btnVazgec = new System.Windows.Forms.Button();
             this.txtDusukStok = new System.Windows.Forms.TextBox();
             this.lblDusukStok = new System.Windows.Forms.Label();
+            this.txtFiyat = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblIacNotu
             // 
             this.lblIacNotu.AutoSize = true;
-            this.lblIacNotu.Location = new System.Drawing.Point(28, 130);
+            this.lblIacNotu.Location = new System.Drawing.Point(27, 159);
             this.lblIacNotu.Name = "lblIacNotu";
             this.lblIacNotu.Size = new System.Drawing.Size(70, 13);
             this.lblIacNotu.TabIndex = 14;
@@ -84,7 +86,7 @@
             // 
             // txtIlacNotu
             // 
-            this.txtIlacNotu.Location = new System.Drawing.Point(104, 130);
+            this.txtIlacNotu.Location = new System.Drawing.Point(103, 159);
             this.txtIlacNotu.Multiline = true;
             this.txtIlacNotu.Name = "txtIlacNotu";
             this.txtIlacNotu.Size = new System.Drawing.Size(231, 73);
@@ -92,7 +94,7 @@
             // 
             // btnKaydet
             // 
-            this.btnKaydet.Location = new System.Drawing.Point(67, 224);
+            this.btnKaydet.Location = new System.Drawing.Point(66, 253);
             this.btnKaydet.Name = "btnKaydet";
             this.btnKaydet.Size = new System.Drawing.Size(75, 23);
             this.btnKaydet.TabIndex = 15;
@@ -102,7 +104,7 @@
             // 
             // btnVazgec
             // 
-            this.btnVazgec.Location = new System.Drawing.Point(184, 224);
+            this.btnVazgec.Location = new System.Drawing.Point(183, 253);
             this.btnVazgec.Name = "btnVazgec";
             this.btnVazgec.Size = new System.Drawing.Size(75, 23);
             this.btnVazgec.TabIndex = 16;
@@ -112,26 +114,45 @@
             // 
             // txtDusukStok
             // 
-            this.txtDusukStok.Location = new System.Drawing.Point(103, 95);
+            this.txtDusukStok.Location = new System.Drawing.Point(102, 125);
             this.txtDusukStok.Name = "txtDusukStok";
-            this.txtDusukStok.Size = new System.Drawing.Size(39, 20);
+            this.txtDusukStok.Size = new System.Drawing.Size(51, 20);
             this.txtDusukStok.TabIndex = 13;
             // 
             // lblDusukStok
             // 
             this.lblDusukStok.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
             this.lblDusukStok.AutoSize = true;
-            this.lblDusukStok.Location = new System.Drawing.Point(15, 98);
+            this.lblDusukStok.Location = new System.Drawing.Point(14, 128);
             this.lblDusukStok.Name = "lblDusukStok";
             this.lblDusukStok.Size = new System.Drawing.Size(83, 13);
             this.lblDusukStok.TabIndex = 18;
             this.lblDusukStok.Text = "DÜŞÜK STOK :";
             // 
+            // txtFiyat
+            // 
+            this.txtFiyat.Location = new System.Drawing.Point(103, 94);
+            this.txtFiyat.Name = "txtFiyat";
+            this.txtFiyat.Size = new System.Drawing.Size(50, 20);
+            this.txtFiyat.TabIndex = 19;
+            // 
+            // label1
+            // 
+            this.label1.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 97);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "SATIŞ FİYATI :";
+            // 
             // FormYeniIlac
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 278);
+            this.ClientSize = new System.Drawing.Size(348, 315);
+            this.Controls.Add(this.txtFiyat);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtDusukStok);
             this.Controls.Add(this.lblDusukStok);
             this.Controls.Add(this.btnVazgec);
@@ -166,5 +187,7 @@
         private System.Windows.Forms.Button btnVazgec;
         private System.Windows.Forms.TextBox txtDusukStok;
         private System.Windows.Forms.Label lblDusukStok;
+        private System.Windows.Forms.TextBox txtFiyat;
+        private System.Windows.Forms.Label label1;
     }
 }
