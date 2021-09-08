@@ -101,7 +101,7 @@ namespace IlacDepoStok.Data
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into ilac(adi, barcode, notu,dusukStok) values (@adi, @barcode, @notu, @dusukStok)", ilac);
+                cnn.Execute("insert into ilac(adi, barcode, notu,dusukStok,fiyat) values (@adi, @barcode, @notu, @dusukStok,@fiyat)", ilac);
             }
         }
 
@@ -123,7 +123,7 @@ namespace IlacDepoStok.Data
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update ilac SET adi=@adi, barcode=@barcode, notu=@notu,dusukStok=@dusukStok WHERE id=@id", ilac);
+                cnn.Execute("update ilac SET adi=@adi, barcode=@barcode, notu=@notu, dusukStok=@dusukStok, fiyat=@fiyat WHERE id=@id", ilac);
             }
         }
 

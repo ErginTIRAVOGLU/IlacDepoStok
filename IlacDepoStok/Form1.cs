@@ -81,6 +81,7 @@ namespace IlacDepoStok
                     FormYeniIlac formYeniIlac = new FormYeniIlac();
                     TextBox newtxtBarkod = (TextBox)formYeniIlac.Controls["txtBarkod"];
                     TextBox newtxtIlacAdi = (TextBox)formYeniIlac.Controls["txtIlacAdi"];
+                    TextBox newtxtIlacFiyat = (TextBox)formYeniIlac.Controls["txtFiyat"];
                     newtxtBarkod.Text = txtBarkod.Text;
                     newtxtIlacAdi.Select();
                     formYeniIlac.ShowDialog();
@@ -176,13 +177,17 @@ namespace IlacDepoStok
             TextBox edittxtIlacAdi = (TextBox)formYeniIlac.Controls["txtIlacAdi"];
             TextBox edittxtIlacNotu = (TextBox)formYeniIlac.Controls["txtIlacNotu"];
             TextBox edittxtIlacDusukStok = (TextBox)formYeniIlac.Controls["txtDusukStok"];
-             
+            TextBox edittxtIlacFiyat = (TextBox)formYeniIlac.Controls["txtFiyat"];
+
             IlacModel ilac = SqliteDataAccess.findIlacbyBarkod(txtBarkod.Text);
 
             edittxtBarkod.Text = ilac.barcode;
             formYeniIlac.lblIdsi = int.Parse(ilac.id.ToString());
             edittxtIlacAdi.Text = ilac.adi;
             edittxtIlacNotu.Text = ilac.notu;
+            int ilacFiyat = 0;
+            int.TryParse(ilac.fiyat.ToString(), out ilacFiyat);
+            edittxtIlacFiyat.Text = ilacFiyat.ToString();
             int dusukStok = 0;
             int.TryParse(ilac.dusukStok.ToString(), out dusukStok);
             edittxtIlacDusukStok.Text = dusukStok.ToString();
@@ -194,6 +199,7 @@ namespace IlacDepoStok
         {
             FormStokGiris frmStokGiris = new FormStokGiris();
             Label ilacAdi = (Label)frmStokGiris.Controls["lblIlacAd"];
+            TextBox ilacFiyat = (TextBox)frmStokGiris.Controls["txtFiyat"];
             frmStokGiris.CariId = CariId;
             
             var cari = SqliteDataAccess.findCaribyCariId(CariId);
@@ -202,6 +208,7 @@ namespace IlacDepoStok
             IlacModel ilac = SqliteDataAccess.findIlacbyBarkod(txtBarkod.Text);
 
             ilacAdi.Text = ilac.adi;
+            ilacFiyat.Text = ilac.fiyat.ToString();
             frmStokGiris.IlacId = ilacid;
             frmStokGiris.ShowDialog();
             loadIlacList();

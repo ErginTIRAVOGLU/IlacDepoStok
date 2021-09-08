@@ -135,6 +135,7 @@
             this.txtFiyat.Name = "txtFiyat";
             this.txtFiyat.Size = new System.Drawing.Size(50, 20);
             this.txtFiyat.TabIndex = 19;
+            this.txtFiyat.TextChanged += new System.EventHandler(this.txtFiyat_TextChanged);
             // 
             // label1
             // 
