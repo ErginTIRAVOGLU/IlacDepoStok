@@ -335,8 +335,9 @@ namespace IlacDepoStok
                     ilacFiyat.Text = hareket.fiyat.ToString();
                     ilacAdet.Text = hareket.adet.ToString();
                     hareketTutar.Text = string.Format(CultureInfo.CreateSpecificCulture("tr-TR"), "{0:C2}", hareket.tutar / 100);
-                    
-                    tarih.Value = DateTime.Parse(hareket.tarih);
+                    tarih.Format = DateTimePickerFormat.Short;
+                   // MessageBox.Show(hareket.tarih);
+                    tarih.Value = DateTime.ParseExact(hareket.tarih,"yyyy-MM-dd",CultureInfo.InvariantCulture);
                     frmStokGiris.IlacId = ilac.id;
                     frmStokGiris.duzenleme = true;
                     frmStokGiris.hareket_depo_id = hareket.depo_id;
@@ -380,8 +381,9 @@ namespace IlacDepoStok
                     ilacFiyat.Text = hareket.fiyat.ToString();
                     ilacAdet.Text = hareket.adet.ToString();
                     hareketTutar.Text = string.Format(CultureInfo.CreateSpecificCulture("tr-TR"), "{0:C2}", hareket.tutar / 100);
-
-                    tarih.Value = DateTime.Parse(hareket.tarih);
+                    tarih.Format = DateTimePickerFormat.Short;
+                   // MessageBox.Show(hareket.tarih);
+                    tarih.Value = DateTime.ParseExact(hareket.tarih, "yyyy-MM-dd", CultureInfo.InvariantCulture);
                     frmStokCikis.IlacId = ilac.id;
                     frmStokCikis.duzenleme = true;
                     frmStokCikis.hareket_depo_id = hareket.depo_id;
