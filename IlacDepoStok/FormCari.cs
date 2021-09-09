@@ -215,10 +215,17 @@ namespace IlacDepoStok
 
         private void button8_Click(object sender, EventArgs e)
         {
+            if(lstBoxCari.SelectedItem!=null)
+            { 
             FormCariHareket formCariHareket = new FormCariHareket();
             int cariId = ((CariModel)(lstBoxCari.SelectedItem)).cari_id;
             formCariHareket.CariId = cariId;
             formCariHareket.ShowDialog();
+            }
+            else
+            {
+
+            }
         }
     }
 }
