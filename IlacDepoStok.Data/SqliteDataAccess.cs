@@ -44,7 +44,14 @@ namespace IlacDepoStok.Data
                 return output.FirstOrDefault();
             }
         }
-
+        public static DepoModel getDepobyDepoId(int? depoId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<DepoModel>("select * from depo where id = @id", new { id = depoId });
+                return output.FirstOrDefault();
+            }
+        }
         public static void UpdateCari(CariModel cariModel)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -93,10 +100,18 @@ namespace IlacDepoStok.Data
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into hareket(yon, adet, ilac_id, depo_id, tarih, cari_id, tutar, fiyat) values (@yon, @adet, @ilac_id, @depo_id, @tarih, @cari_id, @tutar, @fiyat)", hModel);
+                cnn.Execute("insert into hareket(yon, adet, ilac_id, depo_id, tarih, cari_id, tutar, fiyat, ilac_adi, cariadsoyad, depo_adi) values (@yon, @adet, @ilac_id, @depo_id, @tarih, @cari_id, @tutar, @fiyat, @ilac_adi, @cariadsoyad, @depo_adi)", hModel);
             }
         }
-        
+
+        public static void updateHareket(HareketModel hareket)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update hareket SET yon=@yon, adet=@adet, ilac_id=@ilac_id, depo_id=@depo_id, tarih=@tarih, cari_id=@cari_id, tutar=@tutar, fiyat=@fiyat, ilac_adi=@ilac_adi, cariadsoyad=@cariadsoyad, depo_adi=@depo_adi WHERE id=@id", hareket);
+            }
+        }
+
         public static void SaveIlac(IlacModel ilac)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -136,6 +151,37 @@ namespace IlacDepoStok.Data
             }
         }
 
+        public static IlacModel findIlacbyId(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.QueryFirstOrDefault<IlacModel>("select * from ilac where id=@id", new { id = id });
+                return output;
+            }
+        }
+
+        public static HareketModel getHareketbyId(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.QueryFirstOrDefault<HareketModel>("select * from hareket where id=@id", new { id = id });
+                return output;
+            }
+        }
+        public static void hareketSilbyId(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("delete from hareket where id=@id", new { id = id });
+            }
+        }
+        public static void hareketYonDegistirbyId(int id,string yon)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("update hareket SET yon=@yon where id=@id", new { id = id, yon=yon });
+            }
+        }
         public static void updateDepo(DepoModel depo)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -152,6 +198,15 @@ namespace IlacDepoStok.Data
                 return output.FirstOrDefault();
             }
         }
+        public static int findIlacStokbyid(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<int>("select (IFNULL(i2.giren,0)-IFNULL(i3.cikan,0)) as Stok from ilac as i1 left join (select ilac.id, IFNULL(sum(adet),0)as giren from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'G' GROUP by ilac_id) as i2 on i2.id = i1.id left join (select ilac.id, IFNULL(sum(adet),0) as cikan from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'C' GROUP by ilac_id) as i3 on i3.id = i1.id Where i1.id=@id", new { id = id });
+                return output.FirstOrDefault();
+            }
+        }
+
 
         public static void cariSil(int cariId)
         {

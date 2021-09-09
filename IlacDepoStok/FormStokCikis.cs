@@ -15,6 +15,9 @@ namespace IlacDepoStok
 {
     public partial class FormStokCikis : Form
     {
+        public bool duzenleme { get; set; }
+        public int hareket_depo_id { get; set; }
+        public int hareket_id { get; set; }
         public int IlacId { get; set; }
         public int? CariId { get; set; }
         public string CariAdi { get; set; }
@@ -29,6 +32,10 @@ namespace IlacDepoStok
             cmbDepo.DisplayMember = "adi";
             cmbDepo.ValueMember = "id";
             cmbDepo.DataSource = SqliteDataAccess.LoadDepolar();
+            if (duzenleme)
+            {
+                cmbDepo.SelectedValue = hareket_depo_id;
+            }
             lblCariAdi.Text = CariAdi;
         }
 
@@ -56,7 +63,15 @@ namespace IlacDepoStok
 
 
             hModel.tarih = dtpTarih.Value.ToString("yyyy-MM-dd");//DateTime.Today.ToString("yyyy-MM-dd");// 
-            SqliteDataAccess.SaveHareket(hModel);
+            if(duzenleme)
+            {
+                hModel.id = hareket_id;
+                SqliteDataAccess.updateHareket(hModel);
+            }
+            else
+            {
+                SqliteDataAccess.SaveHareket(hModel);
+            }
             this.Close();
         }
 

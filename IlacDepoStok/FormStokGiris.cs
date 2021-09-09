@@ -15,9 +15,14 @@ namespace IlacDepoStok
 {
     public partial class FormStokGiris : Form
     {
+        public bool duzenleme { get; set; }
+        public int hareket_depo_id { get; set; }
+        public int hareket_id { get; set; }
         public int IlacId { get; set; }
         public int? CariId { get; set; }
         public string CariAdi { get; set; }
+
+        
 
         public FormStokGiris()
         {
@@ -29,6 +34,10 @@ namespace IlacDepoStok
             cmbDepo.DisplayMember = "adi";
             cmbDepo.ValueMember = "id";
             cmbDepo.DataSource = SqliteDataAccess.LoadDepolar();
+            if(duzenleme)
+            { 
+            cmbDepo.SelectedValue = hareket_depo_id;
+            }
             lblCariAdi.Text = CariAdi;            
         }
 
@@ -45,7 +54,16 @@ namespace IlacDepoStok
             hModel.yon = "G";
             hModel.depo_id = ((DepoModel)(cmbDepo.SelectedItem)).id;
             hModel.cari_id = int.Parse(CariId.ToString());
+            hModel.ilac_adi = lblIlacAd.Text;
+            int cariId = int.Parse(CariId.ToString());
+            int depoId = ((DepoModel)(cmbDepo.SelectedItem)).id;
 
+            CariModel cari = SqliteDataAccess.getCaribyCariId(cariId);
+            DepoModel depo = SqliteDataAccess.getDepobyDepoId(depoId);
+            hModel.cariadsoyad = cari.cari_ad_soyad;
+            hModel.depo_adi = depo.adi;
+
+            
             string fiyat = txtFiyat.Text.Replace(".", "").Replace("₺", "").Replace(",", "").TrimStart('0');
 
             hModel.fiyat = int.Parse(fiyat);
@@ -56,7 +74,16 @@ namespace IlacDepoStok
 
 
             hModel.tarih = dtpTarih.Value.ToString("yyyy-MM-dd");//DateTime.Today.ToString("yyyy-MM-dd");// dtpTarih.Value.ToString("yyyy-MM-dd");
-            SqliteDataAccess.SaveHareket(hModel);
+            if(duzenleme)
+            {
+                hModel.id = hareket_id;
+                SqliteDataAccess.updateHareket(hModel);
+            }
+            else
+            {
+                SqliteDataAccess.SaveHareket(hModel);
+            }
+            
             this.Close();
         }
         private void txtAdet_TextChanged(object sender, EventArgs e)
