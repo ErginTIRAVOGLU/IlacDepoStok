@@ -12,6 +12,16 @@ namespace IlacDepoStok.Data
 {
     public class SqliteDataAccess
     {
+        [SQLiteFunction(FuncType = FunctionType.Collation, Name = "UTF8CI")]
+        public class SQLiteCaseInsensitiveCollation : SQLiteFunction
+        {
+            private static readonly System.Globalization.CultureInfo _cultureInfo = System.Globalization.CultureInfo.CreateSpecificCulture("tr-TR");
+            public override int Compare(string x, string y)
+            {
+                return string.Compare(x, y, _cultureInfo, System.Globalization.CompareOptions.IgnoreCase);
+            }
+        }
+
         public static List<IlacModel> LoadIlaclar()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -59,7 +69,7 @@ namespace IlacDepoStok.Data
                 cnn.Execute("update cari SET cari_ad_soyad=@cari_ad_soyad,cari_kategori_id=@cari_kategori_id,cari_telefon=@cari_telefon,cari_adres=@cari_adres,cari_not=@cari_not WHERE cari_id=@cari_id", cariModel);
             }
         }
-               
+
 
         public static List<DepoModel> LoadDepolar()
         {
@@ -69,7 +79,7 @@ namespace IlacDepoStok.Data
                 return output.ToList();
             }
         }
-        
+
         public static KategoriModel GetCariKategoribyId(int cariKategoriId)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -120,8 +130,9 @@ namespace IlacDepoStok.Data
             }
         }
 
-        private static string LoadConnectionString(string id="Default")
+        private static string LoadConnectionString(string id = "Default")
         {
+            SQLiteFunction.RegisterFunction(typeof(SQLiteCaseInsensitiveCollation));
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
 
@@ -146,7 +157,7 @@ namespace IlacDepoStok.Data
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.QueryFirstOrDefault<IlacModel>("select * from ilac where barcode=@barcode", new {barcode= barkod });
+                var output = cnn.QueryFirstOrDefault<IlacModel>("select * from ilac where barcode=@barcode", new { barcode = barkod });
                 return output;
             }
         }
@@ -175,11 +186,11 @@ namespace IlacDepoStok.Data
                 cnn.Execute("delete from hareket where id=@id", new { id = id });
             }
         }
-        public static void hareketYonDegistirbyId(int id,string yon)
+        public static void hareketYonDegistirbyId(int id, string yon)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("update hareket SET yon=@yon where id=@id", new { id = id, yon=yon });
+                cnn.Execute("update hareket SET yon=@yon where id=@id", new { id = id, yon = yon });
             }
         }
         public static void updateDepo(DepoModel depo)
@@ -213,7 +224,7 @@ namespace IlacDepoStok.Data
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("delete from cari WHERE cari_id=@cari_id", new { cari_id = cariId });
-            } 
+            }
         }
 
         public static void DeleteDepo(int depoId)
@@ -224,6 +235,22 @@ namespace IlacDepoStok.Data
             }
         }
 
+        public static void DeleteHareketbyIlacId(int ilacId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("delete from hareket WHERE ilac_id=@id", new { id = ilacId });
+            }
+        }
+
+        public static void DeleteIlac(int ilacId)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("delete from ilac WHERE id=@id", new { id = ilacId });
+            }
+        }
+        
         public static List<HareketModel> findHareketbyTarih(string htarih)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -253,11 +280,11 @@ namespace IlacDepoStok.Data
 
         public static List<StokModel> stokDurumu(int depoid)
         {
-            if(depoid==0)
-            { 
+            if (depoid == 0)
+            {
                 using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
                 {
-                    var output = cnn.Query<StokModel>("select i1.*, IFNULL(i2.giren,0)as gireni, IFNULL(i3.cikan,0) as cikani, (IFNULL(i2.giren,0)-IFNULL(i3.cikan,0)) as Stok from ilac as i1 left join (select ilac.id, IFNULL(sum(adet),0)as giren from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'G' GROUP by ilac_id) as i2 on i2.id = i1.id left join (select ilac.id, IFNULL(sum(adet),0) as cikan from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'C' GROUP by ilac_id) as i3 on i3.id = i1.id");
+                    var output = cnn.Query<StokModel>("select i1.*, IFNULL(i2.giren,0)as gireni, IFNULL(i3.cikan,0) as cikani, (IFNULL(i2.giren,0)-IFNULL(i3.cikan,0)) as Stok from ilac as i1 left join (select ilac.id, IFNULL(sum(adet),0)as giren from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'G' GROUP by ilac_id) as i2 on i2.id = i1.id left join (select ilac.id, IFNULL(sum(adet),0) as cikan from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'C' GROUP by ilac_id) as i3 on i3.id = i1.id order by adi");
                     return output.ToList();
                 }
             }
@@ -265,9 +292,18 @@ namespace IlacDepoStok.Data
             {
                 using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
                 {
-                    var output = cnn.Query<StokModel>("select i1.*, IFNULL(i2.giren,0)as gireni, IFNULL(i3.cikan,0) as cikani, (IFNULL(i2.giren,0)-IFNULL(i3.cikan,0)) as Stok from ilac as i1 left join (select ilac.id, IFNULL(sum(adet),0)as giren from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'G' and hareket.depo_id="+depoid+ " GROUP by ilac_id) as i2 on i2.id = i1.id left join (select ilac.id, IFNULL(sum(adet),0) as cikan from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'C' and hareket.depo_id=" + depoid + " GROUP by ilac_id) as i3 on i3.id = i1.id");
+                    var output = cnn.Query<StokModel>("select i1.*, IFNULL(i2.giren,0)as gireni, IFNULL(i3.cikan,0) as cikani, (IFNULL(i2.giren,0)-IFNULL(i3.cikan,0)) as Stok from ilac as i1 left join (select ilac.id, IFNULL(sum(adet),0)as giren from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'G' and hareket.depo_id=@depoid GROUP by ilac_id) as i2 on i2.id = i1.id left join (select ilac.id, IFNULL(sum(adet),0) as cikan from hareket left join ilac on ilac.id = hareket.ilac_id where hareket.yon = 'C' and hareket.depo_id=@depoid GROUP by ilac_id) as i3 on i3.id = i1.id order by adi", new { depoid = depoid });
                     return output.ToList();
                 }
+            }
+        }
+
+        public static List<StokHareketModel> stokDurumubyIlacId(int ilac_id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<StokHareketModel>("select hareket.id, ilac.adi as ilac_adi, ilac.barcode, cari.cari_ad_soyad, depo.adi as depo_adi, hareket.yon, hareket.tarih,  CAST(hareket.fiyat AS FLOAT)/100 as fiyat, hareket.adet, CAST(hareket.tutar AS FLOAT)/100 as tutar from hareket inner join ilac on ilac.id == hareket.ilac_id inner join depo on depo.id == hareket.depo_id inner join cari on cari.cari_id == hareket.cari_id where ilac.id==@ilac_id order by hareket.id desc;", new { ilac_id = ilac_id });
+                return output.ToList();
             }
         }
 
@@ -283,9 +319,9 @@ namespace IlacDepoStok.Data
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("update cari_kategori SET cari_kategori_adi=@cari_kategori_adi WHERE cari_kategori_id=@cari_kategori_id", kategori);
-            }            
+            }
         }
-        
+
         public static List<KategoriModel> LoadCariKategoriler()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -307,7 +343,7 @@ namespace IlacDepoStok.Data
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<CariModel>("select * from cari where cari_ad_soyad like @cari_ad_soyad order by cari_ad_soyad", new { cari_ad_soyad = "%" + cariAdi + "%"});
+                var output = cnn.Query<CariModel>("select * from cari where cari_ad_soyad like @cari_ad_soyad order by cari_ad_soyad", new { cari_ad_soyad = "%" + cariAdi + "%" });
                 return output.ToList();
             }
         }
@@ -315,7 +351,7 @@ namespace IlacDepoStok.Data
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<CariModel>("select * from cari where  cari_kategori_id=@cari_kategori_id and cari_ad_soyad like @cari_ad_soyad order by cari_ad_soyad", new { cari_kategori_id = kategoriId , cari_ad_soyad = "%" + cariAdi + "%" });
+                var output = cnn.Query<CariModel>("select * from cari where  cari_kategori_id=@cari_kategori_id and cari_ad_soyad like @cari_ad_soyad order by cari_ad_soyad", new { cari_kategori_id = kategoriId, cari_ad_soyad = "%" + cariAdi + "%" });
                 return output.ToList();
             }
         }

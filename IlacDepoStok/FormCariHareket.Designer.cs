@@ -105,7 +105,7 @@
             this.dgvCariHareket.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvCariHareket.Location = new System.Drawing.Point(12, 115);
             this.dgvCariHareket.Name = "dgvCariHareket";
-            this.dgvCariHareket.Size = new System.Drawing.Size(776, 323);
+            this.dgvCariHareket.Size = new System.Drawing.Size(820, 377);
             this.dgvCariHareket.TabIndex = 6;
             // 
             // contextMenuStrip1
@@ -116,19 +116,19 @@
             this.toolStripMenuItem3,
             this.toolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(164, 92);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(163, 22);
             this.toolStripMenuItem2.Text = "Hareketi Düzenle";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(163, 22);
             this.toolStripMenuItem4.Text = "G/Ç Yön Değiştir";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
@@ -141,7 +141,7 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.toolStripMenuItem1.Text = "Hareketi Sil";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -149,7 +149,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(844, 504);
             this.Controls.Add(this.dgvCariHareket);
             this.Controls.Add(this.lblCariKategorisi);
             this.Controls.Add(this.lblCariAdi);
